@@ -75,7 +75,7 @@ li.frinum, li.vitnum {
 			</ul>
 		</section>
 		
-		<section class="am-panel am-panel-success" data-am-sticky="{top:80}">
+		<section class="am-panel am-panel-success" data-am-sticky="{top:60}">
 			<div class="am-panel-hd">标签</div>
 			<?php global $CACHE;$tag_cache = $CACHE->readCache('tags'); ?>
 			<ul class="am-list blog-list tags-list">
