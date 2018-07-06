@@ -26,7 +26,7 @@ global $userData;
   <meta name="description" itemprop="description" content="<?php echo $site_description; ?>">
   <meta name="keywords" content="<?php echo $site_key; ?>">
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo TEMPLATE_URL; ?>style.css" />
-  <link rel="alternate icon" href="<?php echo TEMPLATE_URL; ?>assets/i/favicon.png" type="image/png" />
+  <link rel="alternate icon" href="<?php if($config_favicon){echo $config_favicon;}else{echo TEMPLATE_URL.'assets/i/favicon.png';}?>" type="image/png" />
   <link rel="stylesheet" href="<?php echo TEMPLATE_URL; ?>assets/css/amazeui.min.css"/>
   <!--[if lt IE 9]>-->
   <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -119,7 +119,7 @@ global $userData;
 		<div class="am-dropdown" data-am-dropdown>
 		  <button class="am-btn am-btn-warning am-radius am-btn-xs am-dropdown-toggle">关注</button>
 		  <div class="am-dropdown-content">
-			<img src="http://me.tongleer.com/content/uploadfile/201706/008b1497454448.png" width="150" height="150"/>
+			<img src="<?php if($config_follow_qrcode){echo $config_follow_qrcode;}else{echo 'http://me.tongleer.com/content/uploadfile/201706/008b1497454448.png';}?>" width="150" height="150"/>
 		  </div>
 		</div>
 		<button type="button" class="am-btn am-btn-warning am-radius am-btn-xs" onClick="location.href='<?php if($config_home_link){echo $config_home_link;}else{echo $config_home_link;}?>'"><?php if($config_home_name){echo $config_home_name;}else{echo '主页';}?></button>

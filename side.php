@@ -60,11 +60,11 @@ li.frinum, li.vitnum {
 			<ul class="am-list am-list-static am-list-border">
 			  <li>
 				<span><img src="<?php echo TEMPLATE_URL; ?>assets/images/weiboauth.png" /></span><br />
-				<small>快乐贰呆</small>
+				<small><?php if($config_weiboname){echo $config_weiboname;}else{echo '同乐儿';}?></small>
 			  </li>
-			  <li><i class="am-icon-map-marker am-icon-fw"></i><small>北京 东城区</small></li>
-			  <li><i class="am-icon-birthday-cake am-icon-fw"></i><small>2018-07-01</small></li>
-			  <li><i class="am-icon-info am-icon-fw"></i><small>Diamond0422</small></li>
+			  <li><i class="am-icon-map-marker am-icon-fw"></i><small><?php if($config_address){echo $config_address;}else{echo '北京 东城区';}?></small></li>
+			  <li><i class="am-icon-birthday-cake am-icon-fw"></i><small><?php if($config_birthday){echo $config_birthday;}else{echo '2018年7月1日';}?></small></li>
+			  <li><i class="am-icon-info am-icon-fw"></i><small><?php if($config_detail){echo $config_detail;}else{echo '工作联系 ：diamond@tongleer.com 微信：2293338477';}?></small></li>
 			</ul>
 		</section>
 		
