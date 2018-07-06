@@ -26,7 +26,8 @@ global $userData;
   <meta name="description" itemprop="description" content="<?php echo $site_description; ?>">
   <meta name="keywords" content="<?php echo $site_key; ?>">
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo TEMPLATE_URL; ?>style.css" />
-  <link rel="alternate icon" href="<?php if($config_favicon){echo $config_favicon;}else{echo TEMPLATE_URL.'assets/i/favicon.png';}?>" type="image/png" />
+  <?php if($config_favicon==''){$config_favicon=TEMPLATE_URL.'assets/i/favicon.png';}?>
+  <link rel="alternate icon" href="<?=$config_favicon;?>" type="image/png" />
   <link rel="stylesheet" href="<?php echo TEMPLATE_URL; ?>assets/css/amazeui.min.css"/>
   <!--[if lt IE 9]>-->
   <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
