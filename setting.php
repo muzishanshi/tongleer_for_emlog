@@ -111,6 +111,15 @@ if (ROLE == ROLE_ADMIN){
 				<form class="am-form" method="post" action="">
 				  <fieldset class="am-form-set">
 					<div class="am-form-group">
+					  <label for="config_admin_dir">版本检测</label>
+					  <p class="am-form-help">
+						<?php
+						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=1');
+						echo $version;
+						?>
+					  </p>
+					</div>
+					<div class="am-form-group">
 					  <label for="config_admin_dir">后台管理员文件夹名称</label>
 					  <?php
 						if($config_admin_dir==''){
