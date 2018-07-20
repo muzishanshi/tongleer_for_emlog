@@ -108,7 +108,7 @@ if(isset($_GET["setting"])){
 					<?php
 					}else if(strpos($thumb[0],'player.youku.com')){
 						?>
-						<iframe height=400 width=100% src='<?=$thumb[0];?>' frameborder=0 'allowfullscreen'></iframe>
+						<iframe height="400" width="100%" src="<?=$thumb[0];?>" frameborder="0" "allowfullscreen"></iframe>
 						<?php
 					}
 				}else if(count($thumb)>=9){
