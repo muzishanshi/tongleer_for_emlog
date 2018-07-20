@@ -100,7 +100,7 @@ global $userData;
 	<div class="am-modal-bd">
 	  <fieldset class="am-form-set">
 	  <input type="text" name="user" class="am-modal-prompt-input" placeholder="用户名">
-	  <input type="text" name="pw" class="am-modal-prompt-input" placeholder="密码">
+	  <input type="password" name="pw" class="am-modal-prompt-input" placeholder="密码">
 	  <input type="checkbox" name="ispersis" id="ispersis" value="1"> 记住密码
 	  </fieldset>
 	</div>
