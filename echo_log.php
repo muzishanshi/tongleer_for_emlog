@@ -96,7 +96,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 		?>
 		<ol class="am-breadcrumb" style="background-color:#fff;">
 		  <li><a href="<?php echo BLOG_URL; ?>" class="am-icon-home">首页</a></li>
-		  <li><?php blog_sort($logid); ?></li>
+		  <li><?php echo blog_sort($logid); ?></li>
 		  <li class="am-active"><?php echo $log_title; ?></li>
 		</ol>
 		<div class="am-cf am-article" style="padding:10px;background-color:#fff;">
