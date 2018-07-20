@@ -237,7 +237,7 @@ if (ROLE == ROLE_ADMIN){
 						}
 					  ?>
 					  <input type="text" class="" name="config_album_link" value="<?=$config_album_link;?>" id="config_album_link" placeholder="">
-					  <p class="am-form-help">在这里填入自定义相册页面的链接，模板page_album.php即为相册模板，只需建立独立页面即可。</p>
+					  <p class="am-form-help">在这里填入自定义相册页面的链接，模板page_album.php即为相册模板，只需建立独立页面后在页面模板处填写page_album即可。</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_other_1_name">资料卡更多下第一行名称</label>
