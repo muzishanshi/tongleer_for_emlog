@@ -114,7 +114,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=1');
+						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=2');
 						echo $version;
 						?>
 					  </p>

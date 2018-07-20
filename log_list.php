@@ -79,7 +79,7 @@ if(isset($_GET["setting"])){
 		  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;">
 			<div <?php if(isMobile()){?>class="am-u-sm-3 am-list-thumb"<?php }else{?>class="am-u-sm-2 am-list-thumb"<?php }?>>
 			  <a href="">
-				<img class="am-circle" src="https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg" width="80" />
+				<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="50" />
 			  </a>
 			</div>
 			<div <?php if(isMobile()){?>class="am-u-sm-9 am-list-main"<?php }else{?>class="am-u-sm-10 am-list-main"<?php }?> style="margin-bottom:5px;">
@@ -96,20 +96,33 @@ if(isset($_GET["setting"])){
 				</div>
 				<?php
 				$thumb=showThumb($value['content']);
+				$youku='player.youku.com';
+				$miaopai='gslb.miaopai.com';
+				$douyin='aweme.snssdk.com';
 				if(count($thumb)<9&&count($thumb)!=0){
-					if(strpos($thumb[0],'http://player.youku.com')===false){
+					if(strpos($thumb[0],$youku)===false&&strpos($thumb[0],$miaopai)===false&&strpos($thumb[0],$douyin)===false){
 					?>
 					<div class="am-avg-sm-3" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
 					  <img src="<?=$thumb[0];?>"  alt="" width="180" />
 					</div>
 					<?php
+					}else if(strpos($thumb[0],'player.youku.com')){
+						?>
+						<iframe height=400 width=100% src='<?=$thumb[0];?>' frameborder=0 'allowfullscreen'></iframe>
+						<?php
 					}
 				}else if(count($thumb)>=9){
 					?>
 					<ul class="am-avg-sm-3 boxes" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
-						<?php for($i=0;$i<count($thumb);$i++){?>
+						<?php
+						for($i=0;$i<count($thumb);$i++){
+							if(strpos($thumb[$i],$youku)===false&&strpos($thumb[$i],$miaopai)===false&&strpos($thumb[$i],$douyin)===false){
+							?>
 							<li class="box box-1"><img src="<?=$thumb[$i];?>"  alt="" /></li>
-						<?php }?>
+							<?php
+							}
+						}
+						?>
 					</ul>
 					<?php
 				}
