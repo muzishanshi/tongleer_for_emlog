@@ -118,7 +118,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 							"bdText":"<?php echo $log_title; ?>",
 							"bdMini":"2",
 							"bdMiniList":["qzone","tsina","weixin","tqq","sqq","fbook","twi","copy"],
-							"bdPic":"<?php if(showThumb($log_content)){echo showThumb($log_content)[0];};?>",
+							"bdPic":"<?php if(showThumb($log_content)){echo showThumb($log_content)[0];}?>",
 							"bdStyle":"0",
 							"bdSize":"16"
 						},
