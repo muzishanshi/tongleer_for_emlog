@@ -7,7 +7,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 <!-- footer -->
 <footer class="am-footer am-footer-default">
 	<div class="am-footer-miscs ">
-		<?=$config_foot_info;?>
+		<?=printLinks();?>
     </div>
     <div class="am-footer-miscs ">
         <p>

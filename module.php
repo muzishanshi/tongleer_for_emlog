@@ -3,6 +3,9 @@
  * 侧边栏组件、页面模块
  */
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
+global $userData;
+$Link_Model=new Link_Model();
+$User_Model=new User_Model();
 ?>
 <?php
 //更新主题设置
@@ -16,6 +19,35 @@ function updateThemeConfig($ini, $value,$type="string"){
 		$str2 = preg_replace('/' . $ini . "=(.*);/", $ini . '=\'' . $value . '\';',$str); 
 	} 
 	file_put_contents($file, $str2);
+}
+?>
+<?php
+//获取显示的友情链接
+function getShowLinks($hide='n'){
+	$db = MySql::getInstance();
+	$res = $db->query("SELECT * FROM ".DB_PREFIX."link WHERE hide='".$hide."' ORDER BY taxis ASC");
+	$links = array();
+	while($row = $db->fetch_array($res)) {
+		$row['sitename'] = htmlspecialchars($row['sitename']);
+		$row['description'] = subString(htmlClean($row['description'], false),0,80);
+		$row['siteurl'] = $row['siteurl'];
+		$links[] = $row;
+	}
+	return $links;
+}
+?>
+<?php
+//输出友情链接
+function printLinks(){
+	$friendlinks='';
+	$friends=getShowLinks();
+	if(count($friends)>0){
+		$friendlinks.='友情链接：';
+		foreach($friends as $value){
+			$friendlinks.='<a href="'.$value["siteurl"].'" target="_blank" title="'.$value["description"].'">'.$value["sitename"].'</a>&nbsp;';
+		}
+	}
+	echo $friendlinks;
 }
 ?>
 <?php

@@ -2,7 +2,7 @@
 /*
 Template Name:WeiboForEmlog
 Description:一个适合做自媒体的Emlog微博主题<br /><a href="../?setting" target="_blank">模板设置</a>
-Version:1.0.2
+Version:1.0.3
 ForEmlog:6.0.1
 Author:二呆
 Author Url:http://www.tongleer.com
@@ -10,7 +10,6 @@ Author Url:http://www.tongleer.com
 if(!defined('EMLOG_ROOT')) {exit('error!');}
 require_once(dirname(__FILE__).'/config.php');
 require_once View::getView('module');
-global $userData;
 ?>
 <!DOCTYPE html>
 <html>
@@ -115,6 +114,7 @@ global $userData;
 <section class="banner-head" style="background-image:url('<?php if($config_headBg){echo $config_headBg;}else{echo 'http://api.tongleer.com/picturebed/img/bg.jpg';}?>')">
 	<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="100" height="100"/><br />
 	<span><?php if($config_nickname){echo $config_nickname;}else{echo '快乐贰呆';}?></span><br />
+	<small>关注 <?=count($User_Model->getUsers());?>  |  粉丝 <?php echo count($Link_Model->getLinks());?></small><br />
 	<small><?php echo $bloginfo; ?></small>
 	<div>
 		<div class="am-dropdown" data-am-dropdown>

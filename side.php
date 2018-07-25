@@ -37,7 +37,6 @@ li.frinum, li.vitnum {
 		<?php
 		$db = MySql::getInstance();
 		$blog = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."blog WHERE type='blog' AND hide='n' AND checked='y'");
-		$user = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."user");
 		$comment = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."comment");
 		?>
 		<section class="am-panel am-panel-default web-info">
@@ -47,7 +46,7 @@ li.frinum, li.vitnum {
 			</li>
 			<li class="vitnum">
 				<a href="javascript:void(0)">
-				<span>粉丝</span></a><?php echo $user['total'];?>
+				<span>粉丝</span></a><?php echo count($Link_Model->getLinks());?>
 			</li>
 			<li class="ptnum">
 				<a href="javascript:void(0)">

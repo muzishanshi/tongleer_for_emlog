@@ -81,10 +81,6 @@ if (ROLE == ROLE_ADMIN){
 		if($config_detail){
 			updateThemeConfig("config_detail",$config_detail);
 		}
-		$config_foot_info = @isset($_POST['config_foot_info']) ? addslashes(trim($_POST['config_foot_info'])) : '';
-		if($config_foot_info){
-			updateThemeConfig("config_foot_info",$config_foot_info);
-		}
 		echo "<script>location.href='';</script>";
 	}
 	?>
@@ -298,16 +294,6 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <input type="text" class="" name="config_detail" value="<?=$config_detail;?>" id="config_detail" placeholder="">
 					  <p class="am-form-help">在这里填入简介</p>
-					</div>
-					<div class="am-form-group">
-					  <label for="config_foot_info">底部信息</label>
-					  <?php
-						if($config_foot_info==''){
-							$config_foot_info='<p>友情链接：<a href="" target="_blank" rel="nofollow">链接1</a> <a href="" target="_blank" rel="nofollow">链接2</a></p>';
-						}
-					  ?>
-					  <textarea class="" rows="5" name="config_foot_info" id="config_foot_info" placeholder=""><?=$config_foot_info;?></textarea>
-					  <p class="am-form-help">在这里填入底部信息</p>
 					</div>
 					
 				  </fieldset>
