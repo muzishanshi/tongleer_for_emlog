@@ -20,7 +20,7 @@ Description:相册
 	<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-overlay" data-am-gallery="{ pureview: true }" >
 	  <?php
 		$db = MySql::getInstance();
-		$queryTotal = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."blog");
+		$queryTotal = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."blog WHERE type='blog'");
 		$page_now = isset($_GET['page_now']) ? intval($_GET['page_now']) : 1;
 		if($page_now<1){
 			$page_now=1;
@@ -47,7 +47,7 @@ Description:相册
 			}
 		}
 		$i=($page_now-1)*$page_rec<0?0:($page_now-1)*$page_rec;
-		$query = $db->query("SELECT * FROM ".DB_PREFIX."blog WHERE type='blog' ORDER BY date DESC LIMIT ".$i.",".$page_rec);
+		$query = $db->query("SELECT * FROM ".DB_PREFIX."blog WHERE type='blog' ORDER BY date DESC");
 		$i=1;
 		?>
 		<?php	
@@ -63,7 +63,9 @@ Description:相册
 				<li>
 				<div class="am-gallery-item" style="width:100%;height:0px;padding-bottom:100%;position:relative;">
 					<a href="<?=$matches[1][$j];?>">
-					  <img src="<?=$matches[1][$j];?>" style="width:100%;height:100%;position:absolute;" />
+					  <img src="<?=$matches[1][$j];?>" style="width:100%;height:100%;position:absolute;" alt="<?=$row["title"];?>" />
+					  <h3 class="am-gallery-title"><?=$row["title"];?></h3>
+					  <div class="am-gallery-desc"><?=date('Y-m-d H:i:s',$row["date"]);?></div>
 					</a>
 				</div>
 				</li>
