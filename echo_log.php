@@ -89,7 +89,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 		  </ul>
 		</div>
 	</div>
-    <section id="content" class="am-u-md-12">
+    <section id="content">
 		<?php
 		global $CACHE;
 		$user_cache = $CACHE->readCache('user');
