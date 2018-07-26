@@ -138,7 +138,7 @@ require_once View::getView('module');
 	<div data-am-widget="tabs">
       <ul class="am-tabs-nav">
           <li><a class="am-btn am-radius" href="<?php echo BLOG_URL; ?>">主页</a></li>
-		  <li><a class="am-btn am-radius" href="<?php if($config_album_link){echo $config_album_link;}else{echo $config_album_link;}?>"><?php if($config_album_name){echo $config_album_name;}else{echo '相册';}?></a></li>
+		  <li><a class="am-btn am-radius" target="_blank" href="<?php if($config_album_link){echo $config_album_link;}else{echo $config_album_link;}?>"><?php if($config_album_name){echo $config_album_name;}else{echo '相册';}?></a></li>
       </ul>
 	</div>
 </div>
