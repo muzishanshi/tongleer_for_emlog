@@ -12,6 +12,7 @@ $config_bg='http://api.tongleer.com/picturebed/img/bg.jpg';
 $config_headBg='http://api.tongleer.com/picturebed/img/bg.jpg';
 $config_headImgUrl='https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';
 $config_nickname='快乐贰呆';
+$config_sex='girl';
 $config_follow_qrcode='http://me.tongleer.com/content/uploadfile/201706/008b1497454448.png';
 $config_home_name='主页';
 $config_home_link='http://www.tongleer.com';

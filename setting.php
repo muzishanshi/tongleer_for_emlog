@@ -49,6 +49,10 @@ if (ROLE == ROLE_ADMIN){
 		if($config_nickname){
 			updateThemeConfig("config_nickname",$config_nickname);
 		}
+		$config_sex = @isset($_POST['config_sex']) ? addslashes(trim($_POST['config_sex'])) : '';
+		if($config_sex){
+			updateThemeConfig("config_sex",$config_sex);
+		}
 		$config_follow_qrcode = @isset($_POST['config_follow_qrcode']) ? addslashes(trim($_POST['config_follow_qrcode'])) : '';
 		if($config_follow_qrcode){
 			updateThemeConfig("config_follow_qrcode",$config_follow_qrcode);
@@ -142,7 +146,7 @@ if (ROLE == ROLE_ADMIN){
 					  <p class="am-form-help">在这里填入后台管理员文件夹名称，如admin</p>
 					</div>
 					<div class="am-form-group">
-					  <label for="config_admin_dir">是否开启PJAX</label>
+					  <label for="config_is_pjax">是否开启PJAX</label>
 					  <?php
 						if($config_is_pjax==''){
 							$config_is_pjax='n';
@@ -159,7 +163,7 @@ if (ROLE == ROLE_ADMIN){
 					  <p class="am-form-help">开启PJAX后点击网页链接会无刷新跳转，适合结合播放器使用。</p>
 					</div>
 					<div class="am-form-group">
-					  <label for="config_admin_dir">是否开启音乐播放器</label>
+					  <label for="config_is_play">是否开启音乐播放器</label>
 					  <?php
 						if($config_is_play==''){
 							$config_is_play='n';
@@ -176,7 +180,7 @@ if (ROLE == ROLE_ADMIN){
 					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
 					</div>
 					<div class="am-form-group">
-					  <label for="config_admin_dir">是否开启AJAX分页加载</label>
+					  <label for="config_is_ajax_page">是否开启AJAX分页加载</label>
 					  <?php
 						if($config_is_ajax_page==''){
 							$config_is_ajax_page='n';
@@ -251,6 +255,23 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <input type="text" class="" name="config_nickname" value="<?=$config_nickname;?>" id="config_nickname" placeholder="">
 					  <p class="am-form-help">在这里填入微博昵称，它会显示在你的头部资料卡，如：快乐贰呆</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_sex">性别</label>
+					  <?php
+						if($config_sex==''){
+							$config_sex='girl';
+						}
+					  ?>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="boy" name="config_sex" <?php if($config_sex=='boy'){?>checked<?php }?>> 男
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="girl" name="config_sex" <?php if($config_sex=='girl'){?>checked<?php }?>> 女
+						  </label>
+					  </div>
+					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_follow_qrcode">关注二维码</label>
