@@ -141,6 +141,8 @@ if(isset($_GET["setting"])){
 		echo my_page($lognum, $index_lognum, $page, $pageurl);
 		?>
 		<?php if($config_is_ajax_page=='y'){?>
+		<!--ajax分页加载-->
+		<script src="<?php echo TEMPLATE_URL;?>assets/js/jquery.ias.min.js" type="text/javascript"></script>
 		<script>
 		var ias = $.ias({
 			container: "#content", /*包含所有文章的元素*/

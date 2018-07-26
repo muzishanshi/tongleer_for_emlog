@@ -34,8 +34,6 @@ require_once View::getView('module');
   <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.min.js"></script>
   <!--<![endif]-->
-  <!--ajax分页加载-->
-  <script src="<?php echo TEMPLATE_URL;?>assets/js/jquery.ias.min.js" type="text/javascript"></script>
 </head>
 <body style="background-image: url('<?php if($config_bg){echo $config_bg;}?>');">
 <style>
