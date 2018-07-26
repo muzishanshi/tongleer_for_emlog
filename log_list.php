@@ -76,68 +76,86 @@ if(isset($_GET["setting"])){
 	  <?php if (!empty($logs)){ ?>
 		<ul class="am-list">
 		  <?php $k=0;foreach($logs as $value){  ?>
-		  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;">
-			<div <?php if(isMobile()){?>class="am-u-sm-3 am-list-thumb"<?php }else{?>class="am-u-sm-2 am-list-thumb"<?php }?>>
-			  <a href="">
-				<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="50" />
-			  </a>
-			</div>
-			<div <?php if(isMobile()){?>class="am-u-sm-9 am-list-main"<?php }else{?>class="am-u-sm-10 am-list-main"<?php }?> style="margin-bottom:5px;">
-				<h3 class="am-list-item-hd">
-					<a href="<?php echo $value['log_url']; ?>" class="">
-						<?php echo $value['log_title']; ?>
-					</a>
-				</h3>
-				<small class="am-list-item-text"><?php echo gmdate('Y-n-j', $value['date']); ?> <?php if(blog_sort($value['gid'])){echo '来自 '.blog_sort($value['gid']);} ?>&nbsp;&nbsp;<?php blog_tag($value['gid']); ?></small>
-				<div>
-					<small>
-						<?php echo subString(str_replace('阅读全文&gt;&gt;', '', strip_tags(breakLog($value['content'], $value['gid']))),0,140);?>
-					</small>
+		  <div class="tleajaxpage">
+			  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;">
+				<div <?php if(isMobile()){?>class="am-u-sm-3 am-list-thumb"<?php }else{?>class="am-u-sm-2 am-list-thumb"<?php }?>>
+				  <a href="">
+					<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="50" />
+				  </a>
 				</div>
-				<?php
-				$thumb=showThumb($value['content']);
-				$youku='player.youku.com';
-				$miaopai='gslb.miaopai.com';
-				$douyin='aweme.snssdk.com';
-				if(count($thumb)<9&&count($thumb)!=0){
-					if(strpos($thumb[0],$youku)===false&&strpos($thumb[0],$miaopai)===false&&strpos($thumb[0],$douyin)===false){
-					?>
-					<div class="am-avg-sm-3" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
-					  <img src="<?=$thumb[0];?>"  alt="" width="180" />
+				<div <?php if(isMobile()){?>class="am-u-sm-9 am-list-main"<?php }else{?>class="am-u-sm-10 am-list-main"<?php }?> style="margin-bottom:5px;">
+					<h3 class="am-list-item-hd">
+						<a href="<?php echo $value['log_url']; ?>" class="">
+							<?php echo $value['log_title']; ?>
+						</a>
+					</h3>
+					<small class="am-list-item-text"><?php echo gmdate('Y-n-j', $value['date']); ?> <?php if(blog_sort($value['gid'])){echo '来自 '.blog_sort($value['gid']);} ?>&nbsp;&nbsp;<?php blog_tag($value['gid']); ?></small>
+					<div>
+						<small>
+							<?php echo subString(str_replace('阅读全文&gt;&gt;', '', strip_tags(breakLog($value['content'], $value['gid']))),0,140);?>
+						</small>
 					</div>
 					<?php
-					}else if(strpos($thumb[0],'player.youku.com')){
+					$thumb=showThumb($value['content']);
+					$youku='player.youku.com';
+					$miaopai='gslb.miaopai.com';
+					$douyin='aweme.snssdk.com';
+					if(count($thumb)<9&&count($thumb)!=0){
+						if(strpos($thumb[0],$youku)===false&&strpos($thumb[0],$miaopai)===false&&strpos($thumb[0],$douyin)===false){
 						?>
-						<iframe height="400" width="100%" src="<?=$thumb[0];?>" frameborder="0" "allowfullscreen"></iframe>
+						<div class="am-avg-sm-3" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
+						  <img src="<?=$thumb[0];?>"  alt="" width="180" />
+						</div>
+						<?php
+						}else if(strpos($thumb[0],'player.youku.com')){
+							?>
+							<iframe height="400" width="100%" src="<?=$thumb[0];?>" frameborder="0" "allowfullscreen"></iframe>
+							<?php
+						}
+					}else if(count($thumb)>=9){
+						?>
+						<ul class="am-avg-sm-3 boxes" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
+							<?php
+							for($i=0;$i<count($thumb);$i++){
+								if(strpos($thumb[$i],$youku)===false&&strpos($thumb[$i],$miaopai)===false&&strpos($thumb[$i],$douyin)===false){
+								?>
+								<li class="box box-1"><img src="<?=$thumb[$i];?>"  alt="" /></li>
+								<?php
+								}
+							}
+							?>
+						</ul>
 						<?php
 					}
-				}else if(count($thumb)>=9){
 					?>
-					<ul class="am-avg-sm-3 boxes" data-am-widget="gallery" data-am-gallery="{ pureview: true }">
-						<?php
-						for($i=0;$i<count($thumb);$i++){
-							if(strpos($thumb[$i],$youku)===false&&strpos($thumb[$i],$miaopai)===false&&strpos($thumb[$i],$douyin)===false){
-							?>
-							<li class="box box-1"><img src="<?=$thumb[$i];?>"  alt="" /></li>
-							<?php
-							}
-						}
-						?>
-					</ul>
-					<?php
-				}
-				?>
-			</div>
-			<ul class="am-avg-sm-2" style="text-align:center;">
-			  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="">阅读 <?php echo $value['views'];?></a></li>
-			  <li style="border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>#comments">评论 <?php echo $value['comnum'];?></a></li>
-			</ul>
-		  </li>
+				</div>
+				<ul class="am-avg-sm-2" style="text-align:center;">
+				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="">阅读 <?php echo $value['views'];?></a></li>
+				  <li style="border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>#comments">评论 <?php echo $value['comnum'];?></a></li>
+				</ul>
+			  </li>
+		  </div>
 		  <?php $k++;} ?>
 		</ul>
 		<?php
 		echo my_page($lognum, $index_lognum, $page, $pageurl);
 		?>
+		<script>
+		var ias = $.ias({
+			container: "#content", /*包含所有文章的元素*/
+			item: ".tleajaxpage", /*文章元素*/
+			pagination: ".am-pagination", /*分页元素*/
+			next: ".am-pagination a#tlenextpage", /*下一页元素*/
+		});
+		ias.extension(new IASTriggerExtension({
+			text: '<div class="cat-nav am-round"><small>点击查看更多内容</small></div>', /*此选项为需要点击时的文字*/
+			offset: 2, /*设置此项后，到 offset+1 页之后需要手动点击才能加载，取消此项则一直为无限加载*/
+		}));
+		ias.extension(new IASSpinnerExtension());
+		ias.extension(new IASNoneLeftExtension({
+			text: '<div class="cat-nav am-round"><small>已经是全部内容了</small></div>', /*加载完成时的提示*/
+		}));
+		</script>
 	  <?php }else{ ?>
 		<style>
 		.page-main{

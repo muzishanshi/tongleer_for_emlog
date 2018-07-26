@@ -8,25 +8,6 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 	a{
 		color:#000;
 	}
-	.boxes {
-	  width: 180px;
-	}
-	.boxes .box {
-	  height: 60px;
-	  color: #eee;
-	  line-height: 60px;
-	  text-align: center;
-	  font-weight: bold;
-	  transition: all .2s ease;
-	}
-	.boxes .box img{
-		width:100%;
-		height:100%;
-	}
-	.boxes .box:hover {
-	  font-size: 250%;
-	  transform: rotate(360deg);
-	}
 	
 	.cat-nav{
 		width:0.9;

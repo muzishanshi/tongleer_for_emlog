@@ -112,7 +112,7 @@ function my_page($count, $perlogs, $page, $url, $anchor = '') {
 	} 
 	if($page < $pnums) { 
 		$i = $page + 1; 
-		$re .= '<li class="am-pagination-next"><a href="'.$url.$i.'">下一页</a></li>'; 
+		$re .= '<li class="am-pagination-next"><a id="tlenextpage" href="'.$url.$i.'">下一页</a></li>'; 
 	} 
 	$re .= '</ul>'; 
 	return $re; 
