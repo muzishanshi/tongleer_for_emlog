@@ -2,9 +2,9 @@
 /**
  * 主题配置
  */
-$config_admin_dir='login';
-$config_is_pjax='y';
-$config_is_play='y';
+$config_admin_dir='admin';
+$config_is_pjax='n';
+$config_is_play='n';
 $config_nav='<li><a href=http://baidu.com target=_blank>导航1</a></li><li><a href=http://qq.com target=_blank>导航2</a></li>';
 $config_favicon='http://www.tongleer.com/wp-content/themes/D8/img/favicon.png';
 $config_bg='http://api.tongleer.com/picturebed/img/bg.jpg';
