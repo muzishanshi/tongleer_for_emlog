@@ -21,6 +21,10 @@ if (ROLE == ROLE_ADMIN){
 		if($config_is_play){
 			updateThemeConfig("config_is_play",$config_is_play);
 		}
+		$config_is_ajax_page = @isset($_POST['config_is_ajax_page']) ? addslashes(trim($_POST['config_is_ajax_page'])) : '';
+		if($config_is_ajax_page){
+			updateThemeConfig("config_is_ajax_page",$config_is_ajax_page);
+		}
 		$config_nav = @isset($_POST['config_nav']) ? addslashes(trim($_POST['config_nav'])) : '';
 		if($config_nav){
 			updateThemeConfig("config_nav",$config_nav);
@@ -167,6 +171,23 @@ if (ROLE == ROLE_ADMIN){
 						  </label>
 						  <label class="am-radio-inline">
 							<input type="radio" value="n" name="config_is_play" <?php if($config_is_play=='n'){?>checked<?php }?>> 关闭（主题内嵌播放器为试用版，可选择下载<a href="https://x.hacking8.com/?post=227" target="_blank" rel="nofollow">小草播放器</a>插件。）
+						  </label>
+					  </div>
+					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_admin_dir">是否开启AJAX分页加载</label>
+					  <?php
+						if($config_is_ajax_page==''){
+							$config_is_ajax_page='n';
+						}
+					  ?>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="y" name="config_is_ajax_page" <?php if($config_is_ajax_page=='y'){?>checked<?php }?>> 开启（开启后如果不支持可是关闭）
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="n" name="config_is_ajax_page" <?php if($config_is_ajax_page=='n'){?>checked<?php }?>> 关闭
 						  </label>
 					  </div>
 					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>

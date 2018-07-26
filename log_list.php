@@ -140,6 +140,7 @@ if(isset($_GET["setting"])){
 		<?php
 		echo my_page($lognum, $index_lognum, $page, $pageurl);
 		?>
+		<?php if($config_is_ajax_page=='y'){?>
 		<script>
 		var ias = $.ias({
 			container: "#content", /*包含所有文章的元素*/
@@ -156,6 +157,7 @@ if(isset($_GET["setting"])){
 			text: '<div class="cat-nav am-round"><small>已经是全部内容了</small></div>', /*加载完成时的提示*/
 		}));
 		</script>
+		<?php }?>
 	  <?php }else{ ?>
 		<style>
 		.page-main{
