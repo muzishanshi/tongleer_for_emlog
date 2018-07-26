@@ -20,7 +20,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 			Powered by <a href="http://www.emlog.net/" title="Emlog" rel="nofollow">Emlog</a> Theme By <a id="rightdetail" href="http://www.tongleer.com" title="同乐儿">同乐儿</a>
 		</p>
     </div>
-	<div style="display:none;"><?=$config_foot_count;?></div>
+	<div style="display:none;"><?=str_replace('\"','"',$config_foot_count);?></div>
 </footer>
 <!--pjax刷新开始-->
 <?php if($config_is_pjax=='y'){?>
