@@ -96,7 +96,7 @@ function getHotCommentsArticle($limit = 10){
 	$db = MySql::getInstance();
     $sql = $db->query ("SELECT * FROM ".DB_PREFIX."blog WHERE hide='n' AND type='blog' AND top='n' order by `views` DESC limit 0,$index_hotlognum");
 	while($row = $db->fetch_array($sql)){
-		echo '<li class="am-serif"><a href="'.Url::log($row['gid']).'" title="'.$row['title'].'" target="_blank">'.$row['title'].'</a></li>';        
+		echo '<li class="am-serif"><a href="'.Url::log($row['gid']).'" title="'.$row['title'].'">'.$row['title'].'</a></li>';        
 	}
 }
 ?>

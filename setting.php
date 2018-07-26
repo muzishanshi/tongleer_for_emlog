@@ -13,6 +13,14 @@ if (ROLE == ROLE_ADMIN){
 		if($config_admin_dir){
 			updateThemeConfig("config_admin_dir",$config_admin_dir);
 		}
+		$config_is_pjax = @isset($_POST['config_is_pjax']) ? addslashes(trim($_POST['config_is_pjax'])) : '';
+		if($config_is_pjax){
+			updateThemeConfig("config_is_pjax",$config_is_pjax);
+		}
+		$config_is_play = @isset($_POST['config_is_play']) ? addslashes(trim($_POST['config_is_play'])) : '';
+		if($config_is_play){
+			updateThemeConfig("config_is_play",$config_is_play);
+		}
 		$config_nav = @isset($_POST['config_nav']) ? addslashes(trim($_POST['config_nav'])) : '';
 		if($config_nav){
 			updateThemeConfig("config_nav",$config_nav);
@@ -110,7 +118,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=2');
+						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=3');
 						echo $version;
 						?>
 					  </p>
@@ -124,6 +132,40 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <input type="text" class="" name="config_admin_dir" id="config_admin_dir" value="<?=$config_admin_dir;?>" placeholder="">
 					  <p class="am-form-help">在这里填入后台管理员文件夹名称，如admin</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_admin_dir">是否开启PJAX</label>
+					  <?php
+						if($config_is_pjax==''){
+							$config_is_pjax='n';
+						}
+					  ?>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="y" name="config_is_pjax" <?php if($config_is_pjax=='y'){?>checked<?php }?>> 开启
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="n" name="config_is_pjax" <?php if($config_is_pjax=='n'){?>checked<?php }?>> 关闭
+						  </label>
+					  </div>
+					  <p class="am-form-help">开启PJAX后点击网页链接会无刷新跳转，适合结合播放器使用。</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_admin_dir">是否开启音乐播放器</label>
+					  <?php
+						if($config_is_play==''){
+							$config_is_play='n';
+						}
+					  ?>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="y" name="config_is_play" <?php if($config_is_play=='y'){?>checked<?php }?>> 开启
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="n" name="config_is_play" <?php if($config_is_play=='n'){?>checked<?php }?>> 关闭
+						  </label>
+					  </div>
+					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_nav">顶部导航链接</label>

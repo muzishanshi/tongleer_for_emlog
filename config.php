@@ -2,7 +2,9 @@
 /**
  * 主题配置
  */
-$config_admin_dir='admin';
+$config_admin_dir='login';
+$config_is_pjax='y';
+$config_is_play='y';
 $config_nav='<li><a href=http://baidu.com target=_blank>导航1</a></li><li><a href=http://qq.com target=_blank>导航2</a></li>';
 $config_favicon='http://www.tongleer.com/wp-content/themes/D8/img/favicon.png';
 $config_bg='http://api.tongleer.com/picturebed/img/bg.jpg';
@@ -15,7 +17,7 @@ $config_home_link='http://www.tongleer.com';
 $config_album_name='相册';
 $config_album_link='http://localhost/video/album.html';
 $config_other_1_name='^_^';
-$config_other_1_link='javascript:;';
+$config_other_1_link='http://www.tongleer.com';
 $config_weiboname='同乐儿';
 $config_address='北京 东城区';
 $config_birthday='2018年7月1日';

@@ -115,7 +115,8 @@ require_once View::getView('module');
 	<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="100" height="100"/><br />
 	<span><?php if($config_nickname){echo $config_nickname;}else{echo '快乐贰呆';}?></span><br />
 	<small>关注 <?=count($User_Model->getUsers());?>  |  粉丝 <?php echo count($Link_Model->getLinks());?></small><br />
-	<small><?php echo $bloginfo; ?></small>
+	<small><?php echo $bloginfo; ?></small><br />
+	<small>微博认证：<?php if($config_weiboname){echo $config_weiboname;}else{echo '同乐儿';}?></small>
 	<div>
 		<div class="am-dropdown" data-am-dropdown>
 		  <button class="am-btn am-btn-warning am-radius am-btn-xs am-dropdown-toggle">关注</button>

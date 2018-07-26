@@ -49,16 +49,16 @@ if(isset($_GET["setting"])){
 	<div class="cat-nav am-round" data-am-sticky="{top:60}">
 		<div data-am-widget="tabs">
 		  <ul class="am-tabs-nav">
-			  <li><button type="button" class="am-btn am-radius" onClick="location.href='<?php echo BLOG_URL; ?>';">全部</button></li>
+			  <li><a class="am-btn am-radius" href="<?php echo BLOG_URL; ?>"><small>全部</small></a></li>
 			  <li class="am-dropdown" data-am-dropdown>
-				<button type="button" class="am-dropdown-toggle am-btn am-radius" data-am-dropdown-toggle>更多<span class="am-icon-caret-down"></span></button>
+				<a class="am-dropdown-toggle am-btn am-radius" data-am-dropdown-toggle><small>更多</small><span class="am-icon-caret-down"></span></a>
 				<ul class="am-dropdown-content">
 					<?php
 					global $CACHE; 
 					$sort_cache = $CACHE->readCache('sort');
 					foreach($sort_cache as $value){
 						?>
-						<li><a href="<?php echo Url::sort($value['sid']);?>" title="<?php echo $value['sortname'];?>"><?php echo $value['sortname'];?></a></li>
+						<li><a href="<?php echo Url::sort($value['sid']);?>" title="<?php echo $value['sortname'];?>"><small><?php echo $value['sortname'];?></small></a></li>
 						<?php
 					}
 					?>
@@ -72,7 +72,7 @@ if(isset($_GET["setting"])){
 		  </ul>
 		</div>
 	</div>
-    <section class="am-u-md-12">
+    <section id="content" class="am-u-md-12">
 	  <?php if (!empty($logs)){ ?>
 		<ul class="am-list">
 		  <?php $k=0;foreach($logs as $value){  ?>
