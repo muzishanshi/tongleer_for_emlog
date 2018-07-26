@@ -184,7 +184,7 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <div class="am-form-group">
 						  <label class="am-radio-inline">
-							<input type="radio"  value="y" name="config_is_ajax_page" <?php if($config_is_ajax_page=='y'){?>checked<?php }?>> 开启（开启后如果不支持可是关闭）
+							<input type="radio"  value="y" name="config_is_ajax_page" <?php if($config_is_ajax_page=='y'){?>checked<?php }?>> 开启
 						  </label>
 						  <label class="am-radio-inline">
 							<input type="radio" value="n" name="config_is_ajax_page" <?php if($config_is_ajax_page=='n'){?>checked<?php }?>> 关闭
