@@ -77,7 +77,7 @@ if(isset($_GET["setting"])){
 		<ul class="am-list">
 		  <?php $k=0;foreach($logs as $value){  ?>
 		  <div class="tleajaxpage">
-			  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;">
+			  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;list-style-type:none;">
 				<div <?php if(isMobile()){?>class="am-u-sm-3 am-list-thumb"<?php }else{?>class="am-u-sm-2 am-list-thumb"<?php }?>>
 				  <a href="">
 					<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="50" />
@@ -151,7 +151,7 @@ if(isset($_GET["setting"])){
 			next: ".am-pagination a#tlenextpage", /*下一页元素*/
 		});
 		ias.extension(new IASTriggerExtension({
-			text: '<div class="cat-nav am-round"><small>点击查看更多内容</small></div>', /*此选项为需要点击时的文字*/
+			text: '<div class="cat-nav am-round"><small>猛点几次查看更多内容</small></div>', /*此选项为需要点击时的文字*/
 			offset: 2, /*设置此项后，到 offset+1 页之后需要手动点击才能加载，取消此项则一直为无限加载*/
 		}));
 		ias.extension(new IASSpinnerExtension());
