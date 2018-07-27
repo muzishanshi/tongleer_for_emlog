@@ -91,31 +91,11 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 				<?php echo rmBreak($log_content); ?>
 			</p>
 			<p>
-				<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></div>
-				<script>
-					window._bd_share_config={
-						"common":{
-							"bdSnsKey":{},
-							"bdText":"<?php echo $log_title; ?>",
-							"bdMini":"2",
-							"bdMiniList":["qzone","tsina","weixin","tqq","sqq","fbook","twi","copy"],
-							"bdPic":"<?php if(showThumb($log_content)){echo showThumb($log_content)[0];}?>",
-							"bdStyle":"0",
-							"bdSize":"16"
-						},
-						"share":{},
-						"image":{
-							"viewList":["qzone","tqq","weixin","sqq","tsina"],
-							"viewText":"分享到：",
-							"viewSize":"16"
-						},
-						"selectShare":{
-							"bdContainerClass":null,
-							"bdSelectMiniList":["qzone","tqq","weixin","sqq","tsina"]
-						}
-					};
-					with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-				</script>
+				<small>分享至:</small>
+				<?php $sharecontent=subString(str_replace('', '', strip_tags(rmBreak($log_content))),0,140);?>
+				<a href="http://service.weibo.com/share/share.php?url=<?=curPageURL();?>&title=<?php echo $log_title; ?>" onclick="window.open(this.href, 'share', 'width=550,height=335');return false;" ><img src="<?php echo TEMPLATE_URL; ?>assets/images/icon_sina.png" alt="" /></a>
+				<a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?=curPageURL();?>&title=<?php echo $log_title; ?>&site=<?php echo BLOG_URL; ?>&desc=这是一篇神奇的文章&summary=<?php echo $sharecontent; ?>&pics=<?php if(showThumb($log_content)){echo showThumb($log_content)[0];}?>" onclick="window.open(this.href, 'share', 'width=550,height=335');return false;" ><img src="<?php echo TEMPLATE_URL; ?>assets/images/icon_qzone.png" alt="" /></a>
+				<a href="http://connect.qq.com/widget/shareqq/index.html?url=<?=curPageURL();?>&title=<?php echo $log_title; ?>&site=<?php echo BLOG_URL; ?>&desc=这是一篇神奇的文章&summary=<?php echo $sharecontent; ?>&pics=<?php if(showThumb($log_content)){echo showThumb($log_content)[0];}?>" onclick="window.open(this.href, 'share', 'width=550,height=335');return false;" ><img src="<?php echo TEMPLATE_URL; ?>assets/images/icon_qq.png" alt="" /></a>
 			</p>
 		</div>
 		<?php include View::getView('comments');?>

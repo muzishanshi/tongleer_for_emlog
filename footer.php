@@ -6,6 +6,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 ?>
 <!-- footer -->
 <footer class="am-footer am-footer-default">
+	<a style="position:fixed;right:0;bottom:0;" href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up" id="amz-go-top"></a>
 	<div class="am-footer-miscs ">
 		<?=printLinks();?>
     </div>
@@ -85,7 +86,7 @@ $(function() {
     </div>
     <div class="f-cb">&nbsp;</div>
     <div class="m-music-list-wrap" style="display:none;"></div>
-    <div class="m-music-lyric-wrap">
+    <div class="m-music-lyric-wrap" style="display:none;">
         <div class="inner">
             <ul class="js-music-lyric-content">
                 <li class="eof">暂无歌词...</li>
