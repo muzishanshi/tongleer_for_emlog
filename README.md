@@ -36,7 +36,7 @@ http://joke.tongleer.com
 
 # 版本记录
 v1.0.4：<br />
-	新增AJAX分页加载功能
+	新增AJAX分页加载功能和返回顶部功能
 	
 v1.0.3：<br />
 	新增PJAX无刷新浏览和音乐播放器适用版<br />

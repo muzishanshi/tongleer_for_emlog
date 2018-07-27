@@ -110,6 +110,10 @@ function doAct(){
 }
 </script>
 <script>
+/*
+ * 自定义歌单需要至少2首，可到http://api.tongleer.com/music/下载歌曲；
+ * 专辑图片网络有现成的就用现成的，没有就上传微博图床后设置到此处，歌词文件一般酷狗、酷我等软件即可生成。
+ */
 var musicList = [
     {
         title : '花下舞剑',

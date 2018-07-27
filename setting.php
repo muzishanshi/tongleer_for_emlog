@@ -171,10 +171,10 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <div class="am-form-group">
 						  <label class="am-radio-inline">
-							<input type="radio"  value="y" name="config_is_play" <?php if($config_is_play=='y'){?>checked<?php }?>> 开启
+							<input type="radio"  value="y" name="config_is_play" <?php if($config_is_play=='y'){?>checked<?php }?>> 开启（开启后需自行修改主题目录下footer.php进行设置歌单）
 						  </label>
 						  <label class="am-radio-inline">
-							<input type="radio" value="n" name="config_is_play" <?php if($config_is_play=='n'){?>checked<?php }?>> 关闭（主题内嵌播放器为试用版，可选择下载<a href="https://x.hacking8.com/?post=227" target="_blank" rel="nofollow">小草播放器</a>插件。）
+							<input type="radio" value="n" name="config_is_play" <?php if($config_is_play=='n'){?>checked<?php }?>> 关闭
 						  </label>
 					  </div>
 					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
