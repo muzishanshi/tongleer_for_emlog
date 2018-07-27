@@ -194,7 +194,7 @@ if (ROLE == ROLE_ADMIN){
 							<input type="radio" value="n" name="config_is_ajax_page" <?php if($config_is_ajax_page=='n'){?>checked<?php }?>> 关闭
 						  </label>
 					  </div>
-					  <p class="am-form-help">开启播放器后网页内左下角会出现播放器窗口</p>
+					  <p class="am-form-help">开启分页加载后文章列表滚动到底部时会无刷新无限加载下一页的形式，来替换分页导航链接。</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_nav">顶部导航链接</label>
