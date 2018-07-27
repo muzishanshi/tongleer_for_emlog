@@ -22,6 +22,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
     </div>
 	<div style="display:none;"><?=str_replace('\"','"',$config_foot_count);?></div>
 </footer>
+<?php doAction('index_footer'); ?>
 <!--pjax刷新开始-->
 <?php if($config_is_pjax=='y'){?>
 <style>

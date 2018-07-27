@@ -34,6 +34,7 @@ require_once View::getView('module');
   <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.min.js"></script>
   <!--<![endif]-->
+  <?php doAction('index_head'); ini_set('date.timezone','Asia/Shanghai');?>
 </head>
 <body style="background-image: url('<?php if($config_bg){echo $config_bg;}?>');">
 <style>
