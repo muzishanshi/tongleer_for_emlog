@@ -6,7 +6,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 ?>
 <!-- footer -->
 <footer class="am-footer am-footer-default">
-	<a style="position:fixed;right:0;bottom:0;" href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up" id="amz-go-top"></a>
+	<a style="position:fixed;right: 20px;bottom: 100px;" href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up" id="amz-go-top"></a>
 	<div class="am-footer-miscs ">
 		<?=printLinks();?>
     </div>
