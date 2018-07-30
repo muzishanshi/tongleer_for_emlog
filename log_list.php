@@ -129,9 +129,10 @@ if(isset($_GET["setting"])){
 					}
 					?>
 				</div>
-				<ul class="am-avg-sm-2" style="text-align:center;">
+				<ul class="am-avg-sm-3" style="text-align:center;">
 				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="">阅读 <?php echo $value['views'];?></a></li>
-				  <li style="border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>#comments">评论 <?php echo $value['comnum'];?></a></li>
+				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>#comments">评论 <?php echo $value['comnum'];?></a></li>
+				  <li style="border-top:1px solid #ddd;"><a class="am-list-item-text" href="http://service.weibo.com/share/share.php?url=<?php echo $value['log_url']; ?>&title=<?php echo $value['log_title']; ?>" onclick="window.open(this.href, 'share', 'width=550,height=335');return false;" >分享 <span class="am-icon-share-square-o"></span></a></li>
 				</ul>
 			  </li>
 		  </div>
