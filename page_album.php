@@ -31,7 +31,7 @@ Description:相册
 <!-- content section -->
 <section class="page-main" style="word-wrap:break-word;">
 	
-	  <?php
+	<?php
 		$db = MySql::getInstance();
 		$sql = "SELECT * FROM ".DB_PREFIX."blog WHERE type='blog' AND  hide='n' AND checked='y' ORDER BY date DESC";
 		$res = $db->query($sql);
@@ -127,8 +127,7 @@ Description:相册
 			</div>
 		</div>
 		';
-		?>
-	</ul>
+	?>
 	<ul class="am-pagination blog-pagination">
 	  <?php if($page_now!=1){?>
 		<li class="am-pagination-prev"><a href="?page_now=1">首页</a></li>
