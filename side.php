@@ -53,48 +53,63 @@ li.frinum, li.vitnum {
 				<span>文章</span></a><?php echo $blog['total'];?>
 			</li>
 			<div id="commentShowDiv">
-				<span style="text-align: center;"><small><b>最新评论</b></small></span>
 				<?php
 				$resComments = $db->query("SELECT * FROM ".DB_PREFIX."comment WHERE hide='n' ORDER BY date DESC LIMIT 0,5");
-				while($row = $db->fetch_array($resComments)){
+				if($resComments){
 				?>
-				<div>
+					<span style="text-align: center;"><small><b>最新评论</b></small></span>
 					<?php
-					$hash = md5($row['mail']);
-					$avatar = "https://secure.gravatar.com/avatar/$hash?s=40d=mm&r=g";
+					$i=0;
+					while($row = $db->fetch_array($resComments)){
 					?>
-					<img src="<?=$avatar;?>" alt="" class="am-circle" width="18" height="18">
-					<small><?=$row['poster'];?>说：<?=subString(str_replace('', '', strip_tags($row['comment'])),0,20);?></small>
-				</div>
-				<?php
+					<div>
+						<?php
+						$hash = md5($row['mail']);
+						$avatar = "https://secure.gravatar.com/avatar/$hash?s=40d=mm&r=g";
+						?>
+						<img src="<?=$avatar;?>" alt="" class="am-circle" width="18" height="18">
+						<small><?=$row['poster'];?>说：<?=subString(str_replace('', '', strip_tags($row['comment'])),0,20);?></small>
+					</div>
+					<?php
+					$i++;
+					}
+					if($i==0){echo '暂无人评论';}
 				}
 				?>
 			</div>
 			<div id="userShowDiv" style="display:none;">
-				<span style="text-align: center;"><small><b>最新粉丝</b></small></span>
 				<?php
-				$resUsers = $db->query("SELECT * FROM ".DB_PREFIX."user ORDER BY regtime DESC LIMIT 0,5");
-				while($row = $db->fetch_array($resUsers)){
+				$resUsers = $db->query("SELECT * FROM ".DB_PREFIX."user ORDER BY uid DESC LIMIT 0,5");
+				if($resUsers){
 				?>
-				<div>
-					<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
-					<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?><?php if($row['description']!=''){?>（<?=subString(str_replace('', '', strip_tags($row['description'])),0,20);?>）<?php }else{?>（Ta暂无介绍）<?php }?></small>
-				</div>
-				<?php
+					<span style="text-align: center;"><small><b>最新粉丝</b></small></span>
+					<?php
+					while($row = $db->fetch_array($resUsers)){
+					?>
+					<div>
+						<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
+						<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?><?php if($row['description']!=''){?>（<?=subString(str_replace('', '', strip_tags($row['description'])),0,20);?>）<?php }else{?>（Ta暂无介绍）<?php }?></small>
+					</div>
+					<?php
+					}
 				}
 				?>
 			</div>
 			<div id="articleShowDiv" style="display:none;">
-				<span style="text-align: center;"><small><b>最新文章</b></small></span>
 				<?php
 				$resContents = $db->query("SELECT * FROM ".DB_PREFIX."user as u INNER JOIN ".DB_PREFIX."blog as b WHERE type='blog' AND hide='n' AND checked='y' ORDER BY date DESC LIMIT 0,5");
-				while($row = $db->fetch_array($resContents)){
+				if($resContents){
 				?>
-				<div>
-					<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
-					<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?>于<?=date('Y-m-d',$row['date']);?>发表：<font color="#aaa"><?=$row['title'];?></font><?=subString(str_replace('', '', strip_tags($row['content'])),0,35);?></small>
-				</div>
-				<?php
+					<span style="text-align: center;"><small><b>最新文章</b></small></span>
+					<?php
+					while($row = $db->fetch_array($resContents)){
+					?>
+					<div>
+						<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
+						<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?>于<?=date('Y-m-d',$row['date']);?>发表：<font color="#aaa"><?=$row['title'];?></font><?=subString(str_replace('', '', strip_tags($row['content'])),0,35);?></small>
+					</div>
+					<?php
+					}
 				}
 				?>
 			</div>
