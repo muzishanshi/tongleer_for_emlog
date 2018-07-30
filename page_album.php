@@ -114,7 +114,7 @@ Description:相册
 					<div class=\"am-gallery-item\" style=\"width:100%;height:0px;padding-bottom:100%;position:relative;\">
 						<a href=\"javascript:;\">
 							<img src=\"".$value['src']."\" style=\"width:100%;height:100%;position:absolute;\"  alt=\"".$value["title"]."（".date('d日',$value["date"])."）"."\" />
-							<h3 class=\"am-gallery-title\">".$value["title"]."（".date('m日',$value["date"])."）"."</h3>
+							<h3 class=\"am-gallery-title\">".$value["title"]."（".date('d日',$value["date"])."）"."</h3>
 						</a>
 					</div>
 				</li>
