@@ -124,7 +124,7 @@ function getHotCommentsArticle($limit = 10){
 			$width=8;
 			$img='<div class="am-u-sm-4 am-list-thumb"><img src="'.$matches[1][0].'" /></div>';
 		}
-		echo '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" class="am-serif">'.$img.'<a href="'.Url::log($row['gid']).'" title="'.$row['title'].'"><div class="am-u-sm-'.$width.' am-list-main"><small style="word-wrap:break-word;"><small style="word-wrap:break-word;">'.$row['title'].'</small></div></a></li>';        
+		echo '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" class="am-serif">'.$img.'<a href="'.Url::log($row['gid']).'" title="'.$row['title'].'"><div class="am-u-sm-'.$width.' am-list-main"><small style="word-wrap:break-word;">'.$row['title'].'</small></div></a></li>';        
 	}
 	echo '
 			</ul>
