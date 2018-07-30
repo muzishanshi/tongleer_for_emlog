@@ -24,5 +24,6 @@ $config_weiboname='同乐儿';
 $config_address='北京 东城区';
 $config_birthday='2018年7月1日';
 $config_detail='工作联系 ：diamond@tongleer.com 微信：2293338477';
+$config_about="";
 $config_foot_count="";
 ?>

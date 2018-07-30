@@ -110,9 +110,27 @@ function getHotCommentsArticle($limit = 10){
 	$index_hotlognum = Option::get('index_hotlognum');
 	$db = MySql::getInstance();
     $sql = $db->query ("SELECT * FROM ".DB_PREFIX."blog WHERE hide='n' AND type='blog' AND top='n' order by `views` DESC limit 0,$index_hotlognum");
+	echo '
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+			<div class="am-list-news-bd">
+				<ul class="am-list">
+	';
 	while($row = $db->fetch_array($sql)){
-		echo '<li class="am-serif"><a href="'.Url::log($row['gid']).'" title="'.$row['title'].'">'.$row['title'].'</a></li>';        
+		$match_str = "/((http)+.*?((.gif)|(.jpg)|(.bmp)|(.png)|(.GIF)|(.JPG)|(.PNG)|(.BMP)))/";
+		preg_match_all ($match_str,$row['content'],$matches,PREG_PATTERN_ORDER);
+		$img="";
+		$width=12;
+		if(count($matches[1])>0){
+			$width=8;
+			$img='<div class="am-u-sm-4 am-list-thumb"><img src="'.$matches[1][0].'" /></div>';
+		}
+		echo '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" class="am-serif">'.$img.'<a href="'.Url::log($row['gid']).'" title="'.$row['title'].'"><div class="am-u-sm-'.$width.' am-list-main"><small style="word-wrap:break-word;"><small style="word-wrap:break-word;">'.$row['title'].'</small></div></a></li>';        
 	}
+	echo '
+			</ul>
+		</div>
+	</div>
+	';
 }
 ?>
 <?php 

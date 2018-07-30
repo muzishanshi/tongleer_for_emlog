@@ -2,8 +2,8 @@
 /*
  * @WeiboForEmlog
  * @authors 二呆 (www.tongleer.com)
- * @date    2018-07-29
- * @version 1.0.1
+ * @date    2018-07-31
+ * @version 1.0.7
  */
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
 if (ROLE == ROLE_ADMIN){
@@ -97,6 +97,10 @@ if (ROLE == ROLE_ADMIN){
 		if($config_detail){
 			updateThemeConfig("config_detail",$config_detail);
 		}
+		$config_about = @isset($_POST['config_about']) ? addslashes(trim($_POST['config_about'])) : '';
+		if($config_about){
+			updateThemeConfig("config_about",$config_about);
+		}
 		$config_foot_count = @isset($_POST['config_foot_count']) ? addslashes(trim($_POST['config_foot_count'])) : '';
 		if($config_foot_count){
 			updateThemeConfig("config_foot_count",$config_foot_count);
@@ -130,7 +134,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=6');
+						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=7');
 						echo $version;
 						?>
 					  </p>
@@ -146,7 +150,7 @@ if (ROLE == ROLE_ADMIN){
 					  <p class="am-form-help">在这里填入后台管理员文件夹名称，如admin</p>
 					</div>
 					<div class="am-form-group">
-					  <label for="config_is_pjax">是否开启PJAX</label>
+					  <label for="config_is_pjax">是否开启PJAX（尚存在问题）</label>
 					  <?php
 						if($config_is_pjax==''){
 							$config_is_pjax='n';
@@ -382,6 +386,11 @@ if (ROLE == ROLE_ADMIN){
 					  ?>
 					  <input type="text" class="" name="config_detail" value="<?=$config_detail;?>" id="config_detail" placeholder="">
 					  <p class="am-form-help">在这里填入简介</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_about">更多资料链接</label>
+					  <input type="text" class="" name="config_about" value="<?=$config_about;?>" id="config_about" placeholder="">
+					  <p class="am-form-help">在这里填入更多资料的链接，推荐新建page_about模板页面</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_foot_count">统计代码</label>

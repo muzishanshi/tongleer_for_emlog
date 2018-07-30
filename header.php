@@ -1,8 +1,8 @@
 <?php
 /*
 Template Name:WeiboForEmlog
-Description:一个适合做自媒体的Emlog微博主题<br /><a href="../?setting" target="_blank">模板设置</a>
-Version:1.0.6
+Description:一个适合做自媒体的Emlog微博主题<br /><a href="../?setting" target="_blank">模板设置</a><br /><a href="https://github.com/muzishanshi/tongleer_for_emlog" target="_blank">主题Github</a>
+Version:1.0.7
 ForEmlog:6.0.1
 Author:二呆
 Author Url:http://www.tongleer.com
