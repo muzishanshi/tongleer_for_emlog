@@ -71,7 +71,7 @@ if (!defined('EMLOG_ROOT')) {exit('error!');} ?>
 				";
 			}
 			$output .= "
-				<li>时间：<time>".date('m日',$row['date'])."</time>&nbsp;&nbsp;标题：<a href=\"".$log_url."\">".$row['title']."</a></li>
+				<li>时间：<time>".date('d日',$row['date'])."</time>&nbsp;&nbsp;标题：<a href=\"".$log_url."\">".$row['title']."</a></li>
 			";
 			$i++;
 		}
