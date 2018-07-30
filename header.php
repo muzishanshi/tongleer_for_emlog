@@ -2,7 +2,7 @@
 /*
 Template Name:WeiboForEmlog
 Description:一个适合做自媒体的Emlog微博主题<br /><a href="../?setting" target="_blank">模板设置</a>
-Version:1.0.5
+Version:1.0.6
 ForEmlog:6.0.1
 Author:二呆
 Author Url:http://www.tongleer.com

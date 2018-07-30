@@ -130,7 +130,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=5');
+						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=6');
 						echo $version;
 						?>
 					  </p>
