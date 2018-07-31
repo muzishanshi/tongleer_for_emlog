@@ -118,7 +118,7 @@ require_once View::getView('module');
 		<?php if($config_nickname){echo $config_nickname;}else{echo '快乐贰呆';}?>
 		<?php if($config_sex=='girl'){echo '♀';}else{echo '♂';}?>
 	</span><br />
-	<small>关注 <?=count($User_Model->getUsers());?>  |  粉丝 <?php echo count($Link_Model->getLinks());?></small><br />
+	<small>关注 <?php echo count($Link_Model->getLinks());?>  |  粉丝 <?=count($User_Model->getUsers());?></small><br />
 	<small><?php echo $bloginfo; ?></small><br />
 	<small>微博认证：<?php if($config_weiboname){echo $config_weiboname;}else{echo '同乐儿';}?></small>
 	<div>
