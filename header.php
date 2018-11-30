@@ -29,7 +29,7 @@ require_once View::getView('module');
   <link rel="alternate icon" href="<?=$config_favicon;?>" type="image/png" />
   <link rel="stylesheet" href="<?php echo TEMPLATE_URL; ?>assets/css/amazeui.min.css"/>
   <!--[if lt IE 9]>-->
-  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
   <!--[endif]-->
   <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.min.js"></script>
@@ -39,7 +39,7 @@ require_once View::getView('module');
 <body style="background-image: url('<?php if($config_bg){echo $config_bg;}?>');">
 <style>
 .banner-head{
-	background-image: url(http://api.tongleer.com/picturebed/img/bg.jpg);
+	background-image: url(https://ws3.sinaimg.cn/large/ecabade5ly1fxqhgnclydj21hc0u0wn1.jpg);
 	width:960px;
 	margin:10px auto -10px auto;
 	text-align: center;
@@ -112,7 +112,7 @@ require_once View::getView('module');
   </div>
 </div>
 <!--end navigation panel -->
-<section class="banner-head" style="background-image:url('<?php if($config_headBg){echo $config_headBg;}else{echo 'http://api.tongleer.com/picturebed/img/bg.jpg';}?>')">
+<section class="banner-head" style="background-image:url('<?php if($config_headBg){echo $config_headBg;}else{echo 'https://ws3.sinaimg.cn/large/ecabade5ly1fxqhgnclydj21hc0u0wn1.jpg';}?>')">
 	<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="100" height="100"/><br />
 	<span>
 		<?php if($config_nickname){echo $config_nickname;}else{echo '快乐贰呆';}?>
@@ -125,7 +125,7 @@ require_once View::getView('module');
 		<div class="am-dropdown" data-am-dropdown>
 		  <button class="am-btn am-btn-warning am-radius am-btn-xs am-dropdown-toggle">关注</button>
 		  <div class="am-dropdown-content">
-			<img src="<?php if($config_follow_qrcode){echo $config_follow_qrcode;}else{echo 'http://me.tongleer.com/content/uploadfile/201706/008b1497454448.png';}?>" width="150" height="150"/>
+			<img src="<?php if($config_follow_qrcode){echo $config_follow_qrcode;}else{echo 'https://ws3.sinaimg.cn/large/ecabade5ly1fxqhrtr02bj203w03wt8m.jpg';}?>" width="150" height="150"/>
 		  </div>
 		</div>
 		<button type="button" class="am-btn am-btn-warning am-radius am-btn-xs" onClick="location.href='<?php if($config_home_link){echo $config_home_link;}else{echo $config_home_link;}?>'"><?php if($config_home_name){echo $config_home_name;}else{echo '主页';}?></button>

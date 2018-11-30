@@ -134,7 +134,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('http://api.tongleer.com/interface/tongleer.php?action=updateEmlog&version=7');
+						$version=file_get_contents('https://tongleer.com/api/interface/tongleer.php?action=updateEmlog&version=7');
 						echo $version;
 						?>
 					  </p>
@@ -214,7 +214,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_favicon">自定义favicon图标</label>
 					  <?php
 						if($config_favicon==''){
-							$config_favicon='http://www.tongleer.com/wp-content/themes/D8/img/favicon.png';
+							$config_favicon='https://ws3.sinaimg.cn/large/ecabade5ly1fxqhsqmexxj200s00s744.jpg';
 						}
 					  ?>
 					  <input type="text" class="" name="config_favicon" value="<?=$config_favicon;?>" id="config_favicon" placeholder="">
@@ -224,7 +224,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_bg">网页背景图片</label>
 					  <?php
 						if($config_bg==''){
-							$config_bg='http://api.tongleer.com/picturebed/img/bg.jpg';
+							$config_bg='https://ws3.sinaimg.cn/large/ecabade5ly1fxqhtu5xmuj20j60j6dmb.jpg';
 						}
 					  ?>
 					  <input type="text" class="" name="config_bg" id="config_bg" value="<?=$config_bg;?>" placeholder="">
@@ -234,11 +234,11 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_headBg">资料卡背景图片</label>
 					  <?php
 						if($config_headBg==''){
-							$config_headBg='http://api.tongleer.com/picturebed/img/bg.jpg';
+							$config_headBg='https://ws3.sinaimg.cn/large/ecabade5ly1fxqhv23cpxj21hc0u0wn1.jpg';
 						}
 					  ?>
 					  <input type="text" class="" name="config_headBg" id="config_headBg" value="<?=$config_headBg;?>" placeholder="">
-					  <p class="am-form-help">在这里填入资料卡背景图片url，如：http://api.tongleer.com/picturebed/img/bg.jpg</p>
+					  <p class="am-form-help">在这里填入资料卡背景图片url，如：https://ws3.sinaimg.cn/large/ecabade5ly1fxqhv23cpxj21hc0u0wn1.jpg</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_headImgUrl">头像地址</label>
@@ -281,7 +281,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_follow_qrcode">关注二维码</label>
 					  <?php
 						if($config_follow_qrcode==''){
-							$config_follow_qrcode='http://me.tongleer.com/content/uploadfile/201706/008b1497454448.png';
+							$config_follow_qrcode='https://ws3.sinaimg.cn/large/ecabade5ly1fxqhvlfpxvj203w03wt8m.jpg';
 						}
 					  ?>
 					  <input type="text" class="" name="config_follow_qrcode" value="<?=$config_follow_qrcode;?>" id="config_follow_qrcode" placeholder="">
