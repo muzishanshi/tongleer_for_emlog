@@ -365,10 +365,10 @@ function blog_comments_post($logid,$ckname,$ckmail,$ckurl,$verifyCode,$allow_rem
 				　　　　alert("邮件地址不符合规范");
 				　　　　return false;
 				　　}
-					if($("#commentcontent").val()==""){
-						alert("请填写评论内容");
-				　　　　return false;
-					}
+				}
+				if($("#commentcontent").val()==""){
+					alert("请填写评论内容");
+			　　　　return false;
 				}
 			});
 		});
