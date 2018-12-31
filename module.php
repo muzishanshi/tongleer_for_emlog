@@ -23,7 +23,7 @@ function curPageURL(){
 }
 ?>
 <?php
-//更新主题设置
+//更新主题设置（已废弃）
 function updateThemeConfig($ini, $value,$type="string"){ 
 	$file=dirname(__FILE__).'/config.php';
 	$str = file_get_contents($file); 
@@ -54,13 +54,22 @@ function getShowLinks($hide='n'){
 <?php
 //输出友情链接
 function printLinks(){
+	?>
+	<style>
+	.friendlink{margin:0 auto;width:calc(100% - 100px);}
+	@media screen and (max-width:calc(100% - 100px);) {
+		.friendlink{width: calc(100% - 100px);}
+	}
+	</style>
+	<?php
 	$friendlinks='';
 	$friends=getShowLinks();
 	if(count($friends)>0){
-		$friendlinks.='友情链接：';
+		$friendlinks.='<div class="friendlink"><marquee direction="up" behavior="scroll" scrollamount="1" scrolldelay="10" loop="-1" onMouseOver="this.stop()" onMouseOut="this.start()" width="100%" height="30" style="text-align:center;">友情链接：';
 		foreach($friends as $value){
 			$friendlinks.='<a href="'.$value["siteurl"].'" target="_blank" title="'.$value["description"].'">'.$value["sitename"].'</a>&nbsp;';
 		}
+		$friendlinks.='</marquee></div>';
 	}
 	echo $friendlinks;
 }
@@ -216,3 +225,155 @@ function page_tit($page) {
 	}
 }
 ?>
+<?php
+//blog：评论列表
+function blog_comments($comments){
+    extract($comments);
+    if($commentStacks): ?>
+    <div class="comment-list">
+		<h3 class="comment-count">评论列表</h3> <a name="comments"></a>
+		<ul class="comment-list-ul">
+			<?php
+			$isGravatar = Option::get('isgravatar');
+			foreach($commentStacks as $cid):
+				$comment = $comments[$cid];
+				$comment['poster'] = $comment['url'] ? '<a href="'.$comment['url'].'" target="_blank">'.$comment['poster'].'</a>' : $comment['poster'];
+				?>
+				<li id="comment-<?php echo $comment['cid']; ?>" class="comment">
+					<a name="<?php echo $comment['cid']; ?>"></a>
+					<?php if($isGravatar == 'y'): ?>
+						<div class="comment-avatar">
+							<img class="lazy avatar" height="40" width="40" src="<?php echo getGravatar($comment['mail']); ?>">
+						</div>
+					<?php endif; ?>
+					<div class="comment-body">
+						<div class="comment-author">
+							<?php echo $comment['poster']; ?>
+						</div>
+						<div class="comment-content">
+							<p> <?php echo $comment['content']; ?> </p>            
+						</div>
+						<div class="comment-meta clearfix">
+							<span class="comment-date"> <?php echo $comment['date']; ?> </span>
+							<a class="comment-reply right"  href="#comment-<?php echo $comment['cid']; ?>" onclick="commentReply(<?php echo $comment['cid']; ?>,this)"> <span>回复</span> </a>
+						</div>
+					</div>
+					<?php blog_comments_children($comments, $comment['children']); ?>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<?php if($commentPageUrl){ ?>
+	<nav id="page-nav">
+		<div class="inner">
+			<?php echo $commentPageUrl;?>
+		</div>
+	</nav>
+	<?php } ?>
+	<?php endif; ?>
+<?php
+}
+?>
+<?php
+//blog：子评论列表
+function blog_comments_children($comments, $children){
+    $isGravatar = Option::get('isgravatar');
+    foreach($children as $child):
+    $comment = $comments[$child];
+    $comment['poster'] = $comment['url'] ? '<a href="'.$comment['url'].'" target="_blank">'.$comment['poster'].'</a>' : $comment['poster'];
+    ?>
+	<div class="comment-children">
+		<ul>
+			<li id="comment-<?php echo $comment['cid']; ?>" class="comment">
+				<?php if($isGravatar == 'y'): ?>
+					<div class="comment-avatar">
+						<img class="lazy avatar" height="40" width="40" src="<?php echo getGravatar($comment['mail']); ?>">
+					</div>
+				<?php endif; ?>
+				<div class="comment-body">
+					<div class="comment-author">
+						<span> <?php echo $comment['poster']; ?> </span>
+					</div>
+					<div class="comment-content">
+						<p> <?php echo $comment['content']; ?> </p>
+					</div>
+					<div class="comment-meta clearfix">
+						<span class="comment-date"> <?php echo $comment['date']; ?> </span>
+						<?php if($comment['level'] < 4): ?>
+							<a class="comment-reply right" href="#comment-<?php echo $comment['cid']; ?>" onclick="commentReply(<?php echo $comment['cid']; ?>,this)"> <span>回复</span> </a>
+						<?php endif; ?>
+					</div>
+				</div>
+				<?php blog_comments_children($comments, $comment['children']);?>
+			</li>
+		</ul>                 
+	</div>
+	<?php endforeach; ?>
+	<?php }?>
+<?php
+//blog：发表评论表单
+function blog_comments_post($logid,$ckname,$ckmail,$ckurl,$verifyCode,$allow_remark){
+    if($allow_remark == 'y'):
+	?>
+		<div id="comment-place">
+			<div class="comment-post" id="comment-post">
+				<a name="respond"></a>
+				<div class="comment-reply right selected cancel-reply" id="cancel-reply" style="display:none"><a href="javascript:void(0);" onclick="cancelReply()">取消回复</a></div>
+				<div class="comments">
+					<form method="post" id="commentform" name="commentform" action="<?php echo BLOG_URL; ?>index.php?action=addcom" class="comment-form">
+						<?php if(ROLE == ROLE_VISITOR): ?>
+							<input type="hidden" id="ROLE" value="<?php echo ROLE_VISITOR; ?>" />
+							<div class="form-user clearfix ">
+								<div class="form-item form-input">
+									<input type="text" name="comname" title="昵称" class="text authorName" placeholder="昵称*" value="<?php echo $ckname; ?>" required="">
+								</div>
+								<div class="form-item form-input">
+									<input type="text" id="commail" name="commail" title="邮箱" class="text authorEmail" placeholder="邮箱*" value="<?php echo $ckmail; ?>" required="">
+								</div>
+								<div class="form-item form-input">
+									<input type="text" name="comurl" title="网站" class="text authorUrl" placeholder="网站" value="<?php echo $ckurl; ?>">
+								</div>
+							</div>
+						<?php else : ?>
+							<div class="form-item form-welcome">
+								<a href="./admin/?action=logout" class="form-edit">退出 »</a>
+							</div>
+						<?php endif; ?>
+						<?php doAction('comment_head'); ?>
+						<div class="form-item">
+							<textarea class="form-textarea content" id="commentcontent" name="comment" rows="2" title="评论内容" placeholder="评论内容"></textarea>
+						</div>       
+						<div class="form-item clearfix">
+							<?php echo $verifyCode; ?>
+							<?php if(SEND_MAIL == 'Y' || REPLY_MAIL == 'Y'){ ?>
+							<input value="y" type="checkbox" name="send">  允许邮件通知
+							<?php } ?>
+							<button class="btn btn-primary right" type="submit">发布评论</button>
+						</div>
+						<input type="hidden" name="gid" value="<?php echo $logid; ?>" />
+						<input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+		$(function(){
+			$("#commentform").submit(function(){
+				if($("#ROLE").val()=="visitor"){
+					var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+					if(!reg.test($("#commail").val())){
+				　　　　alert("邮件地址不符合规范");
+				　　　　return false;
+				　　}
+					if($("#commentcontent").val()==""){
+						alert("请填写评论内容");
+				　　　　return false;
+					}
+				}
+			});
+		});
+		</script>
+    <?php
+	endif;
+	?>
+<?php }?>

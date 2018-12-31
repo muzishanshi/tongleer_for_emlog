@@ -7,6 +7,48 @@ if(isset($_GET["setting"])){
 	include View::getView('setting');exit;
 }
 ?>
+<script type="text/javascript">
+	$(function(){
+		/*鼠标移入和移出事件*/
+		$('.menu li').hover(function(){	
+			$(this).find('.two').show();
+			/*鼠标移入和移出事件*/
+			$('.two li').hover(function(){
+				var content=$(this).find('.hide li:first small').text();
+				if(content != null && content.length != 0){
+					$(this).find('.hide').show();
+				}
+			},function(){
+				$(this).find('.hide').hide();
+			});
+		},function(){
+			$(this).find('.two').hide();
+		});
+	});
+</script>
+<style>
+	#nav ul.menu li ul{
+		position: relative; 
+		top: 0px; 
+		background: #fff; 
+		border: 1px solid #eee;
+		border-radius: 0 0 3px 3px; 
+	}
+	#nav ul.menu li ul li{
+		position: relative;
+		list-style:none;
+	}
+	#nav ul.menu li ul li .hide{
+		position: relative; 
+		top: 0px; 
+		left: 0px;
+		border: 1px solid #eee;
+		border-radius: 0 0 3px 3px; 
+	}
+	.two,.hide{
+		display:none;
+	}
+</style>
 <style>
 	a{
 		color:#000;
@@ -50,16 +92,44 @@ if(isset($_GET["setting"])){
 		<div data-am-widget="tabs">
 		  <ul class="am-tabs-nav">
 			  <li><a class="am-btn am-radius" href="<?php echo BLOG_URL; ?>"><small>全部</small></a></li>
-			  <li class="am-dropdown" data-am-dropdown>
+			  <li id="nav" class="am-dropdown" data-am-dropdown>
 				<a class="am-dropdown-toggle am-btn am-radius" data-am-dropdown-toggle><small>更多</small><span class="am-icon-caret-down"></span></a>
-				<ul class="am-dropdown-content">
+				<ul class="am-dropdown-content menu">
 					<?php
 					global $CACHE; 
 					$sort_cache = $CACHE->readCache('sort');
-					foreach($sort_cache as $value){
-						?>
-						<li><a href="<?php echo Url::sort($value['sid']);?>" title="<?php echo $value['sortname'];?>"><small><?php echo $value['sortname'];?></small></a></li>
+					foreach($sort_cache as $row){
+						if ($row['pid'] != 0) {
+							continue;
+						}
+					?>
+					<li>
+						<a href="<?php echo Url::sort($row['sid']);?>" title="<?php echo $row['sortname'];?>"><small><?php echo $row['sortname'];?></small></a>
 						<?php
+						$db = MySql::getInstance();
+						$subrow = $db->query("SELECT * FROM " . DB_PREFIX . "sort WHERE pid='".$row['sid']."' ORDER BY taxis ASC;");
+						$subcate = array();
+						while($subrowval = $db->fetch_array($subrow)) {
+							$subcate[] = $subrowval;
+						}
+						if($subcate){
+						?>
+						<ul class="two">
+							<?php
+							foreach($subcate as $sub) {
+								?>
+								<li>
+									<a href="<?php echo Url::sort($sub['sid']);?>" title="<?php echo $sub['sortname'];?>"><small><?php echo $sub['sortname']; ?></small></a>
+								</li>
+								<?php
+							}
+							?>
+						</ul>
+						<?php
+						}
+						?>
+					</li>
+					<?php
 					}
 					?>
 				</ul>
@@ -80,7 +150,7 @@ if(isset($_GET["setting"])){
 			  <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="background-color:#fff;margin-bottom:10px;list-style-type:none;">
 				<div <?php if(isMobile()){?>class="am-u-sm-3 am-list-thumb"<?php }else{?>class="am-u-sm-2 am-list-thumb"<?php }?>>
 				  <a href="">
-					<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="50" />
+					<img class="am-circle" src="<?php echo $config_headImgUrl;?>" width="50" />
 				  </a>
 				</div>
 				<div <?php if(isMobile()){?>class="am-u-sm-9 am-list-main"<?php }else{?>class="am-u-sm-10 am-list-main"<?php }?> style="margin-bottom:5px;">
@@ -134,7 +204,7 @@ if(isset($_GET["setting"])){
 					?>
 				</div>
 				<ul class="am-avg-sm-3" style="text-align:center;">
-				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="">阅读 <?php echo $value['views'];?></a></li>
+				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>">阅读 <?php echo $value['views'];?></a></li>
 				  <li style="border-right:1px solid #ddd;border-top:1px solid #ddd;"><a class="am-list-item-text" href="<?php echo $value['log_url']; ?>#comments">评论 <?php echo $value['comnum'];?></a></li>
 				  <li style="border-top:1px solid #ddd;"><a class="am-list-item-text" href="http://service.weibo.com/share/share.php?url=<?php echo $value['log_url']; ?>&title=<?php echo $value['log_title']; ?>" onclick="window.open(this.href, 'share', 'width=550,height=335');return false;" >分享 <span class="am-icon-share-square-o"></span></a></li>
 				</ul>
@@ -147,7 +217,6 @@ if(isset($_GET["setting"])){
 		?>
 		<?php if($config_is_ajax_page=='y'){?>
 		<!--ajax分页加载-->
-		<script src="<?php echo TEMPLATE_URL;?>assets/js/jquery.ias.min.js" type="text/javascript"></script>
 		<script>
 		var ias = $.ias({
 			container: "#content", /*包含所有文章的元素*/
@@ -156,12 +225,12 @@ if(isset($_GET["setting"])){
 			next: ".am-pagination a#tlenextpage", /*下一页元素*/
 		});
 		ias.extension(new IASTriggerExtension({
-			text: '<div class="cat-nav am-round"><small>猛点几次查看更多内容</small></div>', /*此选项为需要点击时的文字*/
-			offset: 2, /*设置此项后，到 offset+1 页之后需要手动点击才能加载，取消此项则一直为无限加载*/
+			text: '<div class="cat-nav am-round"><small></small></div>', /*此选项为需要点击时的文字*/
+			offset: false, /*设置此项后，到 offset+1 页之后需要手动点击才能加载，取消此项则一直为无限加载*/
 		}));
 		ias.extension(new IASSpinnerExtension());
 		ias.extension(new IASNoneLeftExtension({
-			text: '<div class="cat-nav am-round"><small>已经是全部内容了</small></div>', /*加载完成时的提示*/
+			text: '<div class="cat-nav am-round"><small></small></div>', /*加载完成时的提示*/
 		}));
 		</script>
 		<?php }?>

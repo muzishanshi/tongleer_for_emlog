@@ -55,7 +55,8 @@ li.frinum, li.vitnum {
 			<div id="commentShowDiv">
 				<?php
 				$resComments = $db->query("SELECT * FROM ".DB_PREFIX."comment WHERE hide='n' ORDER BY date DESC LIMIT 0,5");
-				if($resComments){
+				$commentNum=$db->num_rows($resComments);
+				if($commentNum){
 				?>
 					<span style="text-align: center;"><small><b>最新评论</b></small></span>
 					<?php
@@ -68,7 +69,7 @@ li.frinum, li.vitnum {
 						$avatar = "https://secure.gravatar.com/avatar/$hash?s=40d=mm&r=g";
 						?>
 						<img src="<?=$avatar;?>" alt="" class="am-circle" width="18" height="18">
-						<small><?=$row['poster'];?>说：<?=subString(str_replace('', '', strip_tags($row['comment'])),0,20);?></small>
+						<small><a href="<?=$row['url'];?>" title="<?=$row['poster'];?>" target="_blank" rel="nofollow"><?=$row['poster'];?></a>说：<?=subString(str_replace('', '', strip_tags($row['comment'])),0,20);?></small>
 					</div>
 					<?php
 					$i++;
@@ -80,15 +81,19 @@ li.frinum, li.vitnum {
 			<div id="userShowDiv" style="display:none;">
 				<?php
 				$resUsers = $db->query("SELECT * FROM ".DB_PREFIX."user ORDER BY uid DESC LIMIT 0,5");
-				if($resUsers){
+				$userNum=$db->num_rows($resUsers);
+				if($userNum){
 				?>
 					<span style="text-align: center;"><small><b>最新粉丝</b></small></span>
 					<?php
 					while($row = $db->fetch_array($resUsers)){
 					?>
 					<div>
-						<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
-						<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?><?php if($row['description']!=''){?>（<?=subString(str_replace('', '', strip_tags($row['description'])),0,20);?>）<?php }else{?>（Ta暂无介绍）<?php }?></small>
+						<img src="<?=$row['photo']!=""?TEMPLATE_URL.'../../'.$row['photo']:BLOG_URL.$config_admin_dir.'/views/images/avatar.jpg';?>" alt="" class="am-circle" width="18" height="18">
+						<small>
+							<a href="javascript:;" title="<?=$row['email'];?>"><?=$row['nickname']!=''?$row['nickname']:$row['username'];?></a>
+							<?php if($row['description']!=''){?>（<?=subString(str_replace('', '', strip_tags($row['description'])),0,20);?>）<?php }else{?><font color="#aaa">（Ta暂无介绍）<?php }?></font>
+						</small>
 					</div>
 					<?php
 					}
@@ -98,15 +103,21 @@ li.frinum, li.vitnum {
 			<div id="articleShowDiv" style="display:none;">
 				<?php
 				$resContents = $db->query("SELECT * FROM ".DB_PREFIX."user as u INNER JOIN ".DB_PREFIX."blog as b WHERE type='blog' AND hide='n' AND checked='y' ORDER BY date DESC LIMIT 0,5");
-				if($resContents){
+				$contentNum=$db->num_rows($resContents);
+				if($contentNum){
 				?>
 					<span style="text-align: center;"><small><b>最新文章</b></small></span>
 					<?php
 					while($row = $db->fetch_array($resContents)){
 					?>
 					<div>
-						<img src="<?=TEMPLATE_URL.'../../'.$row['photo'];?>" alt="" class="am-circle" width="18" height="18">
-						<small><?=$row['nickname']!=''?$row['nickname']:$row['username'];?>于<?=date('Y-m-d',$row['date']);?>发表：<font color="#aaa"><?=$row['title'];?></font><?=subString(str_replace('', '', strip_tags($row['content'])),0,35);?></small>
+						<img src="<?=$row['photo']!=""?TEMPLATE_URL.'../../'.$row['photo']:BLOG_URL.$config_admin_dir.'/views/images/avatar.jpg';?>" alt="" class="am-circle" width="18" height="18">
+						<small>
+							<a href="<?php echo BLOG_URL; ?>?author=<?=$row['author'];?>" title="<?=$row['username'];?>"><?=$row['nickname']!=''?$row['nickname']:$row['username'];?></a>
+							于<?=date('Y-m-d',$row['date']);?>发表：
+							<a href="<?php echo BLOG_URL; ?>?post=<?=$row['gid'];?>" title="<?=$row['title'];?>"><?=$row['title'];?></a>
+							<font color="#aaa"><?=subString(str_replace('', '', strip_tags($row['content'])),0,35);?></font>
+						</small>
 					</div>
 					<?php
 					}
@@ -119,11 +130,11 @@ li.frinum, li.vitnum {
 			<ul class="am-list am-list-static am-list-border">
 			  <li>
 				<span><img src="<?php echo TEMPLATE_URL; ?>assets/images/weiboauth.png" /></span><br />
-				<small><?php if($config_weiboname){echo $config_weiboname;}else{echo '同乐儿';}?></small>
+				<small><?php echo $config_weiboname;?></small>
 			  </li>
-			  <li><i class="am-icon-map-marker am-icon-fw"></i><small><?php if($config_address){echo $config_address;}else{echo '北京 东城区';}?></small></li>
-			  <li><i class="am-icon-birthday-cake am-icon-fw"></i><small><?php if($config_birthday){echo $config_birthday;}else{echo '2018年7月1日';}?></small></li>
-			  <li><i class="am-icon-info am-icon-fw"></i><small><?php if($config_detail){echo $config_detail;}else{echo '工作联系 ：diamond@tongleer.com 微信：2293338477';}?></small></li>
+			  <li><i class="am-icon-map-marker am-icon-fw"></i><small><?php echo $config_address;?></small></li>
+			  <li><i class="am-icon-birthday-cake am-icon-fw"></i><small><?php echo $config_birthday;?></small></li>
+			  <li><i class="am-icon-info am-icon-fw"></i><small><?php echo $config_detail;?></small></li>
 			  <li style="text-align: center;"><small><a href="<?=$config_about;?>">查看更多 ></a></small></li>
 			</ul>
 		</section>

@@ -4,24 +4,29 @@
  */
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
 ?>
+<div id="side-button">
+	<ul>
+		<li id="go-top" class="am-icon-btn am-icon-arrow-up"></li>
+		<li id="go-bottom" class="am-icon-btn am-icon-arrow-down"></li>
+		<!--侧滑评论所需开始-->
+		<?php if ($type=='page'||$type=='blog') : ?>
+		<li id="ex-comment" class="am-icon-btn am-icon-comments"></li>
+		<?php endif; ?>
+		<!--侧滑评论所需结束-->
+	</ul>
+</div>
 <!-- footer -->
 <footer class="am-footer am-footer-default">
-	<a style="position:fixed;right: 50px;bottom: 50px;" href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up" id="amz-go-top"></a>
 	<div class="am-footer-miscs ">
 		<?=printLinks();?>
-    </div>
-    <div class="am-footer-miscs ">
-        <p>
-			CopyRight©2018 <a href="<?php echo BLOG_URL; ?>"><?php echo $blogname; ?></a>
-		</p>
     </div>
 	<div class="am-footer-miscs ">
 		<!--尊重以下网站版权是每一个合法公民应尽的义务，请不要去除以下版权。-->
 		<p>
-			Powered by <a href="http://www.emlog.net/" title="Emlog" rel="nofollow">Emlog</a> Theme By <a id="rightdetail" href="http://www.tongleer.com" title="同乐儿">同乐儿</a>
+			CopyRight©<?=date("Y");?> <a href="<?php echo BLOG_URL; ?>"><?php echo $blogname; ?></a> Powered by <a href="http://www.emlog.net/" title="Emlog" rel="nofollow">Emlog</a> Theme By <a id="rightdetail" href="http://www.tongleer.com" title="同乐儿">Tongleer</a>
 		</p>
     </div>
-	<div style="display:none;"><?=str_replace('\"','"',$config_foot_count);?></div>
+	<div style="display:none;"><?=$config_foot_count;?></div>
 </footer>
 <?php doAction('index_footer'); ?>
 <!--pjax刷新开始-->
@@ -179,7 +184,6 @@ var musicList = [
 </script>
 <?php }?>
 <!--音乐播放器结束-->
-
 <!--[if lt IE 9]>-->
 <script src="https://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<?php echo TEMPLATE_URL; ?>assets/js/amazeui.ie8polyfill.min.js"></script>
@@ -187,5 +191,47 @@ var musicList = [
 <script src="<?php echo TEMPLATE_URL; ?>assets/js/amazeui.widgets.helper.min.js" type="text/javascript"></script>
 <script src="<?php echo TEMPLATE_URL; ?>assets/js/amazeui.min.js" type="text/javascript"></script>
 <script src="<?php echo TEMPLATE_URL; ?>assets/js/app.js"></script>
+<script src="<?php echo BLOG_URL; ?>include/lib/js/common_tpl.js" type="text/javascript"></script>
+<script>
+/*侧滑评论所需开始*/
+$(function() {
+	if(window.location.href.indexOf("#comment-")>-1) {
+		$("#post-comments").addClass("comment-open");
+	}
+	$("#ex-comment").click(function() {
+		$("#post-comments").toggleClass("comment-open");
+	});
+});
+/*侧滑评论所需结束*/
+/*goToTop*/
+$(function(){
+	$("#go-top").hide();
+	$(window).scroll(function(){
+		if($(this).scrollTop() > 100){
+			$('#go-top').fadeIn();
+		}else{
+			$('#go-top').fadeOut();
+		}
+	});
+	$('#go-top').click(function(){
+		$('html ,body').animate({scrollTop: 0}, 300);
+		return false;
+	});
+});
+/*goToBottom*/
+$(function(){
+	$(window).scroll(function(){
+		if($(this).scrollTop() > (document.body.scrollHeight - 1000)) {
+			$('#go-bottom').fadeOut();
+		}else{
+			$('#go-bottom').fadeIn();
+		}
+	});
+	$('#go-bottom').click(function(){
+		$('html ,body').animate({scrollTop: document.body.scrollHeight}, 300);
+		return false;
+	});
+});
+</script>
 </body>
 </html>

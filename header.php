@@ -1,8 +1,8 @@
 <?php
 /*
-Template Name:WeiboForEmlog
-Description:一个适合做自媒体的Emlog微博主题<br /><a href="../?setting" target="_blank">模板设置</a><br /><a href="https://github.com/muzishanshi/tongleer_for_emlog" target="_blank">主题Github</a>
-Version:1.0.7
+Template Name:WeiboForEmlog<br /><a href="../?setting" target="_blank">模板设置</a>&nbsp;<a href="https://github.com/muzishanshi/tongleer_for_emlog" target="_blank">主题Github</a>&nbsp;
+Description:一个适合做自媒体的Emlog微博主题
+Version:1.0.8
 ForEmlog:6.0.1
 Author:二呆
 Author Url:http://www.tongleer.com
@@ -25,7 +25,6 @@ require_once View::getView('module');
   <meta name="description" itemprop="description" content="<?php echo $site_description; ?>">
   <meta name="keywords" content="<?php echo $site_key; ?>">
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo TEMPLATE_URL; ?>style.css" />
-  <?php if($config_favicon==''){$config_favicon=TEMPLATE_URL.'assets/i/favicon.png';}?>
   <link rel="alternate icon" href="<?=$config_favicon;?>" type="image/png" />
   <link rel="stylesheet" href="<?php echo TEMPLATE_URL; ?>assets/css/amazeui.min.css"/>
   <!--[if lt IE 9]>-->
@@ -34,9 +33,10 @@ require_once View::getView('module');
   <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.min.js"></script>
   <!--<![endif]-->
+  <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.ias.min.js" type="text/javascript"></script>
   <?php doAction('index_head'); ini_set('date.timezone','Asia/Shanghai');?>
 </head>
-<body style="background-image: url('<?php if($config_bg){echo $config_bg;}?>');">
+<body style="background-image: url('<?php echo $config_bg;?>');">
 <style>
 .banner-head{
 	background-image: url(https://ws3.sinaimg.cn/large/ecabade5ly1fxqhgnclydj21hc0u0wn1.jpg);
@@ -75,7 +75,7 @@ require_once View::getView('module');
 	<div class="am-topbar-collapse am-collapse" id="collapse-head">
 	  <ul class="am-nav am-nav-pills am-topbar-nav">
 		  <li><a href="<?php echo BLOG_URL; ?>"><span class="am-icon-home"></span>首页</a></li>
-		  <?php if($config_nav){echo $config_nav;}?>
+		  <?php echo $config_nav;?>
 	  </ul>
 	  <?php if(!ISLOGIN){ ?>
 	  <div class="am-topbar-right">
@@ -86,7 +86,7 @@ require_once View::getView('module');
 	  <?php }else{?>
       <div class="am-topbar-right">
         <div class="am-topbar-btn">
-			<span class="am-icon-user"></span><a href="<?=BLOG_URL;?><?php if($config_admin_dir){echo $config_admin_dir;}else{echo 'admin';}?>"><?=$userData['nickname'];?></a>
+			<span class="am-icon-user"></span><a href="<?=BLOG_URL;?><?php echo $config_admin_dir;?>"><?=$userData['nickname']!=""?$userData['nickname']:$userData['username'];?></a>
 		</div>
       </div>
 	  <?php }?>
@@ -95,7 +95,7 @@ require_once View::getView('module');
 </header>
 <div class="am-modal am-modal-prompt" tabindex="-1" id="login-prompt">
   <div class="am-modal-dialog">
-	<form class="am-form" id="loginForm" method="post" action="<?php echo BLOG_URL; ?><?php if($config_admin_dir){echo $config_admin_dir;}else{echo 'admin';}?>/index.php?action=login">
+	<form class="am-form" id="loginForm" method="post" action="<?php echo BLOG_URL; ?><?php echo $config_admin_dir;?>/index.php?action=login">
 	<div class="am-modal-hd">登录</div>
 	<div class="am-modal-bd">
 	  <fieldset class="am-form-set">
@@ -112,28 +112,28 @@ require_once View::getView('module');
   </div>
 </div>
 <!--end navigation panel -->
-<section class="banner-head" style="background-image:url('<?php if($config_headBg){echo $config_headBg;}else{echo 'https://ws3.sinaimg.cn/large/ecabade5ly1fxqhgnclydj21hc0u0wn1.jpg';}?>')">
-	<img class="am-circle" src="<?php if($config_headImgUrl){echo $config_headImgUrl;}else{echo 'https://cambrian-images.cdn.bcebos.com/39ceafd81d6813a014e747db4aa6f0eb_1524963877208.jpeg';}?>" width="100" height="100"/><br />
+<section class="banner-head" style="background-image:url('<?php echo $config_headBg;?>')">
+	<img class="am-circle" src="<?php echo $config_headImgUrl;?>" width="100" height="100"/><br />
 	<span>
-		<?php if($config_nickname){echo $config_nickname;}else{echo '快乐贰呆';}?>
+		<?php echo $config_nickname;?>
 		<?php if($config_sex=='girl'){echo '♀';}else{echo '♂';}?>
 	</span><br />
 	<small>关注 <?php echo count($Link_Model->getLinks());?>  |  粉丝 <?=count($User_Model->getUsers());?></small><br />
 	<small><?php echo $bloginfo; ?></small><br />
-	<small>微博认证：<?php if($config_weiboname){echo $config_weiboname;}else{echo '同乐儿';}?></small>
+	<small>微博认证：<?php echo $config_weiboname;?></small>
 	<div>
 		<div class="am-dropdown" data-am-dropdown>
 		  <button class="am-btn am-btn-warning am-radius am-btn-xs am-dropdown-toggle">关注</button>
 		  <div class="am-dropdown-content">
-			<img src="<?php if($config_follow_qrcode){echo $config_follow_qrcode;}else{echo 'https://ws3.sinaimg.cn/large/ecabade5ly1fxqhrtr02bj203w03wt8m.jpg';}?>" width="150" height="150"/>
+			<img src="<?php echo $config_follow_qrcode;?>" width="150" height="150"/>
 		  </div>
 		</div>
-		<button type="button" class="am-btn am-btn-warning am-radius am-btn-xs" onClick="location.href='<?php if($config_home_link){echo $config_home_link;}else{echo $config_home_link;}?>'"><?php if($config_home_name){echo $config_home_name;}else{echo '主页';}?></button>
+		<button type="button" class="am-btn am-btn-warning am-radius am-btn-xs" onClick="location.href='<?php echo $config_home_link;?>'"><?php echo $config_home_name;?></button>
 		<div class="am-dropdown" data-am-dropdown>
 			<button class="am-btn am-btn-warning am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span
         class="am-icon-bars"></span></button>
 		  <ul class="am-dropdown-content">
-			<li><a href="<?php if($config_other_1_link){echo $config_other_1_link;}else{echo $config_other_1_link;}?>"><?php if($config_other_1_name){echo $config_other_1_name;}else{echo '^_^';}?></li>
+			<li><a href="<?php echo $config_other_1_link;?>"><?php echo $config_other_1_name;?></li>
 		  </ul>
 		</div>
 	</div>
@@ -142,7 +142,7 @@ require_once View::getView('module');
 	<div data-am-widget="tabs">
       <ul class="am-tabs-nav">
           <li><a class="am-btn am-radius" href="<?php echo BLOG_URL; ?>">主页</a></li>
-		  <li><a class="am-btn am-radius" target="_blank" href="<?php if($config_album_link){echo $config_album_link;}else{echo $config_album_link;}?>"><?php if($config_album_name){echo $config_album_name;}else{echo '相册';}?></a></li>
+		  <li><a class="am-btn am-radius" target="_blank" href="<?php echo $config_album_link;?>"><?php echo $config_album_name;?></a></li>
       </ul>
 	</div>
 </div>
