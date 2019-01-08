@@ -2,8 +2,8 @@
 /*
  * @WeiboForEmlog
  * @authors 二呆 (www.tongleer.com)
- * @date    2018-12-31
- * @version 1.0.8
+ * @date    2018-01-08
+ * @version 1.0.9
  */
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
 require_once(dirname(__FILE__).'/config.php');
@@ -94,7 +94,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('https://tongleer.com/api/interface/tongleer.php?action=updateEmlog&version=8');
+						$version=file_get_contents('https://tongleer.com/api/interface/tongleer.php?action=updateEmlog&version=9');
 						echo $version;
 						?>
 					  </p>
