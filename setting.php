@@ -2,18 +2,69 @@
 /*
  * @WeiboForEmlog
  * @authors 二呆 (www.tongleer.com)
- * @date    2018-01-08
- * @version 1.0.9
+ * @date    2018-01-18
+ * @version 1.0.10
  */
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
 require_once(dirname(__FILE__).'/config.php');
 if (ROLE == ROLE_ADMIN){
+	$db = MySql::getInstance();
+	$res = $db->query("SELECT option_value FROM ".DB_PREFIX."options WHERE option_name='nonce_templet'");
+	$row = $db->fetch_array($res);
+	$config_playjsonvalue='
+		[{
+			"title":"花下舞剑",
+			"singer":"童可可",
+			"cover":"https://img3.kuwo.cn/star/albumcover/240/49/7/2753401394.jpg",
+			"src":"http://other.web.rf01.sycdn.kuwo.cn/resource/n1/84/87/3802376964.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-huaxiawujian.lrc"
+		},{
+			"title":"萌二代",
+			"singer":"童可可",
+			"cover":"https://img3.kuwo.cn/star/albumcover/240/35/65/238194684.jpg",
+			"src":"http://other.web.rg01.sycdn.kuwo.cn/resource/n3/21/49/2096701565.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-mengerdai.lrc"
+		},{
+			"title":"吃货进行曲",
+			"singer":"童可可",
+			"cover":"https://img3.kuwo.cn/star/albumcover/240/26/34/1695727344.jpg",
+			"src":"http://other.web.rh01.sycdn.kuwo.cn/resource/n3/15/72/1780780959.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-chihuojinxingqu.lrc"
+		},{
+			"title":"小秘密",
+			"singer":"童可可",
+			"cover":"https://img3.kuwo.cn/star/albumcover/240/55/73/500614479.jpg",
+			"src":"http://other.web.rh01.sycdn.kuwo.cn/resource/n1/74/68/3330561514.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-xiaomimi.lrc"
+		},{
+			"title":"听你爱听的歌",
+			"singer":"童可可",
+			"cover":"https://img1.kuwo.cn/star/starheads/240/16/85/44330486.jpg",
+			"src":"http://other.web.rh01.sycdn.kuwo.cn/resource/n2/80/39/46671518.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-tingniaitingdege.lrc"
+		},{
+			"title":"别让我放不下",
+			"singer":"童可可",
+			"cover":"https://img1.kuwo.cn/star/albumcover/240/9/59/996272309.jpg",
+			"src":"http://other.web.rh01.sycdn.kuwo.cn/resource/n1/15/60/2541949312.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-bierangwofangbuxia.lrc"
+		},{
+			"title":"非主恋",
+			"singer":"童可可",
+			"cover":"https://img4.kuwo.cn/star/albumcover/240/21/10/339989310.jpg",
+			"src":"http://other.web.rh01.sycdn.kuwo.cn/resource/n2/34/93/1218459911.mp3",
+			"lyric":"'.TPLS_URL.$row["option_value"].'/assets/smusic/data/tongkeke-feizhulian.lrc"
+		}]
+	';
 	$action = isset($_POST['action']) ? addslashes($_POST['action']) : '';
 	if($action=='setting'){
 		$config_admin_dir = @isset($_POST['config_admin_dir']) ? addslashes(str_replace("'","\'",trim($_POST['config_admin_dir']))) : 'admin';
 		$config_is_pjax = @isset($_POST['config_is_pjax']) ? addslashes(trim(str_replace("'","\'",$_POST['config_is_pjax']))) : 'n';
 		$config_is_play = @isset($_POST['config_is_play']) ? addslashes(trim(str_replace("'","\'",$_POST['config_is_play']))) : 'n';
 		$config_is_ajax_page = @isset($_POST['config_is_ajax_page']) ? addslashes(str_replace("'","\'",trim($_POST['config_is_ajax_page']))) : 'n';
+		$config_is_play_auto = @isset($_POST['config_is_play_auto']) ? addslashes(trim(str_replace("'","\'",$_POST['config_is_play_auto']))) : 'false';
+		$config_is_play_defaultMode = @isset($_POST['config_is_play_defaultMode']) ? addslashes(trim(str_replace("'","\'",$_POST['config_is_play_defaultMode']))) : '1';
+		$config_playjson = @isset($_POST['config_playjson']) ? trim($_POST['config_playjson']) : $config_playjsonvalue;
 		$config_nav = @isset($_POST['config_nav']) ? addslashes(str_replace("'","\'",trim($_POST['config_nav']))) : '';
 		$config_favicon = @isset($_POST['config_favicon']) ? addslashes(str_replace("'","\'",trim($_POST['config_favicon']))) : '';
 		$config_bg = @isset($_POST['config_bg']) ? addslashes(str_replace("'","\'",trim($_POST['config_bg']))) : '';
@@ -40,6 +91,9 @@ if (ROLE == ROLE_ADMIN){
 				 \$config_is_pjax = '".$config_is_pjax."';
 				 \$config_is_play = '".$config_is_play."';
 	 			 \$config_is_ajax_page = '".$config_is_ajax_page."';
+				 \$config_is_play_auto = '".$config_is_play_auto."';
+				 \$config_is_play_defaultMode = '".$config_is_play_defaultMode."';
+				 \$config_playjson = '".$config_playjson."';
 				 \$config_nav = '".$config_nav."';
 				 \$config_favicon = '".$config_favicon."';
 				 \$config_bg = '".$config_bg."';
@@ -94,7 +148,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_admin_dir">版本检测</label>
 					  <p class="am-form-help">
 						<?php
-						$version=file_get_contents('https://tongleer.com/api/interface/tongleer.php?action=updateEmlog&version=9');
+						$version=file_get_contents('https://tongleer.com/api/interface/tongleer.php?action=updateEmlog&version=10');
 						echo $version;
 						?>
 					  </p>
@@ -105,7 +159,7 @@ if (ROLE == ROLE_ADMIN){
 					  <p class="am-form-help">在这里填入后台管理员文件夹名称，如admin</p>
 					</div>
 					<div class="am-form-group">
-					  <label for="config_is_pjax">是否开启PJAX（尚存在问题）</label>
+					  <label for="config_is_pjax">是否开启PJAX</label>
 					  <div class="am-form-group">
 						  <label class="am-radio-inline">
 							<input type="radio"  value="y" name="config_is_pjax" <?php if($config_is_pjax=='y'){?>checked<?php }?>> 开启
@@ -120,7 +174,7 @@ if (ROLE == ROLE_ADMIN){
 					  <label for="config_is_play">是否开启音乐播放器</label>
 					  <div class="am-form-group">
 						  <label class="am-radio-inline">
-							<input type="radio"  value="y" name="config_is_play" <?php if($config_is_play=='y'){?>checked<?php }?>> 开启（开启后需自行修改主题目录下footer.php进行设置歌单）
+							<input type="radio"  value="y" name="config_is_play" <?php if($config_is_play=='y'){?>checked<?php }?>> 开启
 						  </label>
 						  <label class="am-radio-inline">
 							<input type="radio" value="n" name="config_is_play" <?php if($config_is_play=='n'){?>checked<?php }?>> 关闭
@@ -138,7 +192,39 @@ if (ROLE == ROLE_ADMIN){
 							<input type="radio" value="n" name="config_is_ajax_page" <?php if($config_is_ajax_page=='n'){?>checked<?php }?>> 关闭
 						  </label>
 					  </div>
-					  <p class="am-form-help">开启分页加载后文章列表滚动到底部时会无刷新无限加载下一页的形式，来替换分页导航链接。</p>
+					  <p class="am-form-help">开启分页加载后文章列表滚动到底部时会无刷新无限加载下一页的形式，来替换分页导航链接。目前开启后会与图片放大功能冲突。</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_is_play_auto">是否自动播放</label>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="true" name="config_is_play_auto" <?php if($config_is_play_auto=='true'){?>checked<?php }?>> 自动
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="false" name="config_is_play_auto" <?php if($config_is_play_auto=='false'){?>checked<?php }?>> 手动
+						  </label>
+					  </div>
+					  <p class="am-form-help">开启后将自动播放音乐。</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_is_play_defaultMode">播放模式</label>
+					  <div class="am-form-group">
+						  <label class="am-radio-inline">
+							<input type="radio"  value="1" name="config_is_play_defaultMode" <?php if($config_is_play_defaultMode=='1'){?>checked<?php }?>> 列表循环
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="2" name="config_is_play_defaultMode" <?php if($config_is_play_defaultMode=='2'){?>checked<?php }?>> 随机播放
+						  </label>
+						  <label class="am-radio-inline">
+							<input type="radio" value="3" name="config_is_play_defaultMode" <?php if($config_is_play_defaultMode=='3'){?>checked<?php }?>> 单曲循环
+						  </label>
+					  </div>
+					  <p class="am-form-help">选择一种播放音乐的模式</p>
+					</div>
+					<div class="am-form-group">
+					  <label for="config_playjson">播放器音乐数据</label>
+					  <textarea class="" rows="5" name="config_playjson" id="config_playjson" placeholder=""><?=$config_playjsonvalue;?></textarea>
+					  <p class="am-form-help">自定义歌单需要至少2首，可到<a href="http://api.tongleer.com/music/" target="_blank">http://api.tongleer.com/music/</a>下载歌曲，专辑图片网络有现成的就用现成的，没有就上传微博图床后设置到此处，歌词文件一般酷狗、酷我等软件即可生成。</p>
 					</div>
 					<div class="am-form-group">
 					  <label for="config_nav">顶部导航链接</label>

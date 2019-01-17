@@ -2,7 +2,7 @@
 /*
 Template Name:WeiboForEmlog<br /><a href="../?setting" target="_blank">模板设置</a>&nbsp;<a href="https://github.com/muzishanshi/tongleer_for_emlog" target="_blank">主题Github</a>&nbsp;
 Description:一个适合做自媒体的Emlog微博主题
-Version:1.0.9
+Version:1.0.10
 ForEmlog:6.0.1
 Author:二呆
 Author Url:http://www.tongleer.com
@@ -33,7 +33,9 @@ require_once View::getView('module');
   <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.min.js"></script>
   <!--<![endif]-->
+  <?php if($config_is_ajax_page=='y'){?>
   <script src="<?php echo TEMPLATE_URL; ?>assets/js/jquery.ias.min.js" type="text/javascript"></script>
+  <?php }?>
   <?php doAction('index_head'); ini_set('date.timezone','Asia/Shanghai');?>
 </head>
 <body style="background-image: url('<?php echo $config_bg;?>');">
@@ -80,7 +82,11 @@ require_once View::getView('module');
 	  <?php if(!ISLOGIN){ ?>
 	  <div class="am-topbar-right">
         <div class="am-topbar-btn">
-			<span class="am-icon-user"></span> <a href="javascript:;"id="login-prompt-toggle">登录</a>
+			<?php if($config_is_pjax=='y'){?>
+			<span class="am-icon-user"></span> <a href="<?=BLOG_URL;?><?php echo $config_admin_dir;?>">登录</a>
+			<?php }else{?>
+			<span class="am-icon-user"></span> <a href="javascript:;" id="login-prompt-toggle">登录</a>
+			<?php }?>
 		</div>
       </div>
 	  <?php }else{?>

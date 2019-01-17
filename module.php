@@ -243,7 +243,15 @@ function blog_comments($comments){
 					<a name="<?php echo $comment['cid']; ?>"></a>
 					<?php if($isGravatar == 'y'): ?>
 						<div class="comment-avatar">
-							<img class="lazy avatar" height="40" width="40" src="<?php echo getGravatar($comment['mail']); ?>">
+							<?php
+							$host = 'https://secure.gravatar.com';
+							$url = '/avatar/';
+							$size = '50';
+							$rating = 'g';
+							$hash = md5(strtolower($comment['mail']));
+							$avatar = $host . $url . $hash . '?s=' . $size . '&r=' . $rating . '&d=mm';
+							?>
+							<img class="lazy avatar" height="40" width="40" src="<?php echo $avatar; ?>">
 						</div>
 					<?php endif; ?>
 					<div class="comment-body">
@@ -287,7 +295,15 @@ function blog_comments_children($comments, $children){
 			<li id="comment-<?php echo $comment['cid']; ?>" class="comment">
 				<?php if($isGravatar == 'y'): ?>
 					<div class="comment-avatar">
-						<img class="lazy avatar" height="40" width="40" src="<?php echo getGravatar($comment['mail']); ?>">
+						<?php
+						$host = 'https://secure.gravatar.com';
+						$url = '/avatar/';
+						$size = '50';
+						$rating = 'g';
+						$hash = md5(strtolower($comment['mail']));
+						$avatar = $host . $url . $hash . '?s=' . $size . '&r=' . $rating . '&d=mm';
+						?>
+						<img class="lazy avatar" height="40" width="40" src="<?php echo $avatar; ?>">
 					</div>
 				<?php endif; ?>
 				<div class="comment-body">
@@ -313,6 +329,7 @@ function blog_comments_children($comments, $children){
 <?php
 //blog：发表评论表单
 function blog_comments_post($logid,$ckname,$ckmail,$ckurl,$verifyCode,$allow_remark){
+	include(dirname(__FILE__).'/config.php');
     if($allow_remark == 'y'):
 	?>
 		<div id="comment-place">
@@ -336,7 +353,7 @@ function blog_comments_post($logid,$ckname,$ckmail,$ckurl,$verifyCode,$allow_rem
 							</div>
 						<?php else : ?>
 							<div class="form-item form-welcome">
-								<a href="./admin/?action=logout" class="form-edit">退出 »</a>
+								<a href="./<?=$config_admin_dir?>/?action=logout" class="form-edit">退出 »</a>
 							</div>
 						<?php endif; ?>
 						<?php doAction('comment_head'); ?>
@@ -349,6 +366,7 @@ function blog_comments_post($logid,$ckname,$ckmail,$ckurl,$verifyCode,$allow_rem
 							<input value="y" type="checkbox" name="send">  允许邮件通知
 							<?php } ?>
 							<button class="btn btn-primary right" type="submit">发布评论</button>
+							<span id="commentAlert"></span>
 						</div>
 						<input type="hidden" name="gid" value="<?php echo $logid; ?>" />
 						<input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1"/>
