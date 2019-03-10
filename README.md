@@ -25,7 +25,7 @@
 # 官方演示
 http://www.tongleer.com（emlog演示站已删，此站为wordpress主题演示。）
 
-QQ群：770956878
+1元入群：http://joke.tongleer.com/328.html
 
 # 版本推荐
 php5.6以上+mysql
