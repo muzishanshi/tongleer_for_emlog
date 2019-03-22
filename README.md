@@ -31,6 +31,10 @@ http://www.tongleer.com（emlog演示站已删，此站为wordpress主题演示�
 php5.6以上+mysql
 
 # 版本记录
+2019-03-22 V1.0.11
+
+	修复了因cdn.bootcss.com中JS静态资源不可访问导致的js失效的问题。
+
 2019-01-18 V1.0.10
 
 	1、使pjax不再是摆设，可以一直无刷新浏览网页了；
