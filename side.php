@@ -35,7 +35,7 @@ li.frinum, li.vitnum {
 <div class="am-u-md-3 am-u-md-pull-9">
     <div class="am-panel-group">
 		<?php
-		$db = MySql::getInstance();
+		$db = Database::getInstance();
 		$blog = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."blog WHERE type='blog' AND hide='n' AND checked='y'");
 		$comment = $db->once_fetch_array("SELECT COUNT(*) AS total FROM ".DB_PREFIX."comment");
 		?>

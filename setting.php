@@ -8,7 +8,7 @@
 if(!defined('EMLOG_ROOT')) {exit('error!');} 
 require_once(dirname(__FILE__).'/config.php');
 if (ROLE == ROLE_ADMIN){
-	$db = MySql::getInstance();
+	$db = Database::getInstance();
 	$res = $db->query("SELECT option_value FROM ".DB_PREFIX."options WHERE option_name='nonce_templet'");
 	$row = $db->fetch_array($res);
 	$config_playjsonvalue='

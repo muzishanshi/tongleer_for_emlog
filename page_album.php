@@ -32,7 +32,7 @@ Description:相册
 <section class="page-main" style="word-wrap:break-word;">
 	
 	<?php
-		$db = MySql::getInstance();
+		$db = Database::getInstance();
 		$sql = "SELECT * FROM ".DB_PREFIX."blog WHERE type='blog' AND  hide='n' AND checked='y' ORDER BY date DESC";
 		$res = $db->query($sql);
 		$album=array();

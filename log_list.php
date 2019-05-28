@@ -106,7 +106,7 @@ if(isset($_GET["setting"])){
 					<li>
 						<a href="<?php echo Url::sort($row['sid']);?>" title="<?php echo $row['sortname'];?>"><small><?php echo $row['sortname'];?></small></a>
 						<?php
-						$db = MySql::getInstance();
+						$db = Database::getInstance();
 						$subrow = $db->query("SELECT * FROM " . DB_PREFIX . "sort WHERE pid='".$row['sid']."' ORDER BY taxis ASC;");
 						$subcate = array();
 						while($subrowval = $db->fetch_array($subrow)) {

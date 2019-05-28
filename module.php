@@ -39,7 +39,7 @@ function updateThemeConfig($ini, $value,$type="string"){
 <?php
 //获取显示的友情链接
 function getShowLinks($hide='n'){
-	$db = MySql::getInstance();
+	$db = Database::getInstance();
 	$res = $db->query("SELECT * FROM ".DB_PREFIX."link WHERE hide='".$hide."' ORDER BY taxis ASC");
 	$links = array();
 	while($row = $db->fetch_array($res)) {
@@ -117,7 +117,7 @@ function widget_tag($title){
 /*调用热门文章*/
 function getHotCommentsArticle($limit = 10){
 	$index_hotlognum = Option::get('index_hotlognum');
-	$db = MySql::getInstance();
+	$db = Database::getInstance();
     $sql = $db->query ("SELECT * FROM ".DB_PREFIX."blog WHERE hide='n' AND type='blog' AND top='n' order by `views` DESC limit 0,$index_hotlognum");
 	echo '
 		<div data-am-widget="list_news" class="am-list-news am-list-news-default" >
