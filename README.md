@@ -31,6 +31,10 @@ http://www.tongleer.com（emlog演示站已删，此站为wordpress主题演示�
 php5.6以上+mysql
 
 # 版本记录
+2019-10-02 V1.0.12
+
+	修复因加载cloudflare的layer.js失效导致的bug。
+
 2019-03-22 V1.0.11
 
 	修复了因cdn.bootcss.com中JS静态资源不可访问导致的js失效的问题。
