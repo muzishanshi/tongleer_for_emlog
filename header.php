@@ -65,7 +65,7 @@ require_once View::getView('module');
 }
 </style>
 <!-- navigation panel -->
-<header class="am-topbar am-topbar-fixed-top" style="opacity:0.9;">
+<header class="am-topbar am-topbar-fixed-top" style="opacity:0.9;-moz-opacity:0.9;">
   <div class="am-container">
 	<h1 class="am-topbar-brand">
 	  <a href="<?php echo BLOG_URL; ?>"><?php echo $blogname; ?></a>
