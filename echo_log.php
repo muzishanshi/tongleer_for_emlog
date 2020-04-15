@@ -140,6 +140,7 @@ if(!defined('EMLOG_ROOT')) {exit('error!');}
 			<p>
 				<?php echo rmBreak($log_content); ?>
 			</p>
+			<p><?php doAction('log_related',$logData); ?></p>
 			<p>
 				<small>分享至:</small>
 				<?php $sharecontent=subString(str_replace('', '', strip_tags(rmBreak($log_content))),0,140);?>
